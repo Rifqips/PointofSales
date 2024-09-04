@@ -1,10 +1,12 @@
 package id.application.pointofsales.presentation.feature.home
 
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.application.pointofsales.R
 import id.application.pointofsales.databinding.FragmentHomeBinding
 import id.application.pointofsales.presentation.adapter.BouquetAdapter
 import id.application.pointofsales.presentation.adapter.BouquetItem
+import id.application.pointofsales.presentation.adapter.ProductAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
 import id.application.pointofsales.utils.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -13,6 +15,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, VmApplication>(FragmentHo
 
     override val viewModel: VmApplication by viewModel()
     private lateinit var adapter: BouquetAdapter
+    private lateinit var adapterProduct: ProductAdapter
+
     private val allProducts = listOf(
         BouquetItem("https://i.pinimg.com/736x/c7/26/40/c72640b4c7fc07895b392c98755a1164.jpg","Bouquet A", 10000, 5000, 2000, 17000),
         BouquetItem("https://i.pinimg.com/originals/d8/2a/cd/d82acd6891fc8cc98dfbd4db9604e53c.jpg","Bouquet B", 15000, 6000, 3000, 24000),
@@ -30,8 +34,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, VmApplication>(FragmentHo
 
     override fun initView() {
         adapter = BouquetAdapter(allProducts)
-        binding.rvListProduct.layoutManager = GridLayoutManager(context, 3)
-        binding.rvListProduct.adapter = adapter
+        adapterProduct = ProductAdapter(allProducts)
+        with(binding){
+            rvListProduct.layoutManager = GridLayoutManager(context, 3)
+            rvListProduct.adapter = adapter
+            rvTotalOrder.layoutManager = LinearLayoutManager(context)
+            rvTotalOrder.adapter = adapterProduct
+        }
     }
 
 
