@@ -4,27 +4,36 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import id.application.core.data.local.database.cart.CartKeys
 import id.application.pointofsales.databinding.ItemCartProductBinding
 
-class ProductAdapter(private var items: List<BouquetItem>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private var items: List<CartKeys>,
+    private var onDelete : (CartKeys) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(val binding: ItemCartProductBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BouquetItem) {
-            binding.ivProduct.load(item.url)
-            binding.tvDescripionProduct.text = item.name
-            binding.tvTitleStorage.text = "Bahan: Rp ${item.bahan}"
-            binding.tvProductPrice.text = "Harga Jual: Rp ${item.hargaJual}"
-            var count = 1
-            binding.tvCountNumber.text = count.toString()
-            binding.tvMinus.setOnClickListener {
-                if (count > 1) {
-                    count--
-                    binding.tvCountNumber.text = count.toString()
+        fun bind(item: CartKeys) {
+            with(binding){
+                ivProduct.load(item.url)
+                tvDescripionProduct.text = item.name
+                tvTitleStorage.text = "Bahan: Rp ${item.bahan}"
+                tvProductPrice.text = "Harga Jual: Rp ${item.hargaJual}"
+                var count = 1
+                tvCountNumber.text = count.toString()
+                tvMinus.setOnClickListener {
+                    if (count > 1) {
+                        count--
+                        tvCountNumber.text = count.toString()
+                    }
                 }
-            }
-            binding.tvPlus.setOnClickListener {
-                count++
-                binding.tvCountNumber.text = count.toString()
+                tvPlus.setOnClickListener {
+                    count++
+                    tvCountNumber.text = count.toString()
+                }
+                ivDelete.setOnClickListener {
+                    onDelete.invoke(item)
+                }
             }
         }
     }
@@ -40,8 +49,8 @@ class ProductAdapter(private var items: List<BouquetItem>) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = items.size
 
-    fun updateData(newItems: List<BouquetItem>) {
-        items = newItems
+    fun setlistCart(listCart: List<CartKeys>){
+        this.items = listCart
         notifyDataSetChanged()
     }
 }

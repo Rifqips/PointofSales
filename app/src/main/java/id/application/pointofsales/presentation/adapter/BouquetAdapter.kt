@@ -6,16 +6,25 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.application.pointofsales.databinding.ItemBouquetBinding
 
-class BouquetAdapter(private var items: List<BouquetItem>) : RecyclerView.Adapter<BouquetAdapter.BouquetViewHolder>() {
+class BouquetAdapter(
+    private var items: List<BouquetItem>,
+    private var onButtonClick: (BouquetItem) -> Unit,
+) : RecyclerView.Adapter<BouquetAdapter.BouquetViewHolder>() {
 
     inner class BouquetViewHolder(val binding: ItemBouquetBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BouquetItem) {
-            binding.ivUrl.load(item.url)
-            binding.tvBouquetName.text = item.name
-            binding.tvBahan.text = "Bahan: Rp ${item.bahan}"
-            binding.tvJasa.text = "Jasa: Rp ${item.jasa}"
-            binding.tvLaba.text = "Laba: Rp ${item.laba}"
-            binding.tvHargaJual.text = "Harga Jual: Rp ${item.hargaJual}"
+            with(binding){
+                ivUrl.load(item.url)
+                tvBouquetName.text = item.name
+                tvBahan.text = "Bahan: Rp ${item.bahan}"
+                tvJasa.text = "Jasa: Rp ${item.jasa}"
+                tvLaba.text = "Laba: Rp ${item.laba}"
+                tvHargaJual.text = "Harga Jual: Rp ${item.hargaJual}"
+                btnAddCart.setOnClickListener {
+                    onButtonClick.invoke(item)
+                }
+            }
+
         }
     }
 

@@ -6,19 +6,27 @@ import id.application.core.data.datasource.AppPreferenceDataSourceImpl
 import id.application.core.data.datasource.ApplicationDataSource
 import id.application.core.data.datasource.ApplicationDataSourceImpl
 import id.application.core.data.local.database.ApplicationDatabase
+import id.application.core.data.local.datastore.PreferenceDataStoreHelper
+import id.application.core.data.local.datastore.PreferenceDataStoreHelperImpl
+import id.application.core.data.local.datastore.appDataSource
 import id.application.core.data.network.interceptor.AuthInterceptor
 import id.application.core.data.network.service.ApplicationService
 import id.application.core.domain.repository.ApplicationRepository
 import id.application.core.domain.repository.ApplicationRepositoryImpl
+import id.application.core.domain.repository.ApplicationRoomRepository
+import id.application.core.domain.repository.ApplicationRoomRepositoryImpl
 import id.application.core.utils.AssetWrapperApp
 import id.application.core.utils.NetworkChangeReceiver
+import id.application.pointofsales.presentation.viewmodel.VmApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 object AppModules {
 
     private val viewModelModule = module {
+        viewModelOf(::VmApplication)
     }
 
     private val utilsModule = module {
@@ -26,12 +34,10 @@ object AppModules {
     }
 
     private val localModule = module {
-//        single { androidContext().appDataSource }
-//        single { ApplicationDatabase.getInstance(get()) }
-//        single<PreferenceDataStoreHelper> { PreferenceDataStoreHelperImpl(get()) }
-//        single { get<ApplicationDatabase>().blocksDao() }
-//        single { get<ApplicationDatabase>().plantsDao() }
-//        single { get<ApplicationDatabase>().geotagsOfflineDao() }
+        single { androidContext().appDataSource }
+        single { ApplicationDatabase.getInstance(get()) }
+        single<PreferenceDataStoreHelper> { PreferenceDataStoreHelperImpl(get()) }
+        single { get<ApplicationDatabase>().cartDao() }
 
     }
 
@@ -42,7 +48,7 @@ object AppModules {
     }
 
     private val dataSourceModule = module {
-        single<AppPreferenceDataSource> { AppPreferenceDataSourceImpl() }
+        single<AppPreferenceDataSource> { AppPreferenceDataSourceImpl(get()) }
         single<ApplicationDataSource> { ApplicationDataSourceImpl() }
     }
 
@@ -50,6 +56,7 @@ object AppModules {
         single<ApplicationRepository> {
             ApplicationRepositoryImpl()
         }
+        single<ApplicationRoomRepository> { ApplicationRoomRepositoryImpl(get()) }
     }
 
     private val pagingSource = module {

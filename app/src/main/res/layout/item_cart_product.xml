@@ -3,11 +3,8 @@
     android:id="@+id/cv_product_store"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:padding="8dp"
+    android:layout_height="100dp"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -70,6 +67,16 @@
         app:layout_constraintStart_toEndOf="@id/cv_img_user"
         android:textColor="?attr/colorControlNormal"/>
 
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_count_result_product"
+        app:layout_constraintEnd_toStartOf="@+id/ll_count_result_product"
+        app:layout_constraintTop_toTopOf="@id/ll_count_result_product"
+        app:tint="?attr/colorControlNormal" />
 
     <LinearLayout
         android:id="@+id/ll_count_result_product"
@@ -79,7 +86,6 @@
         android:gravity="center_vertical"
         android:background="@drawable/rounded_background_quantity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
