@@ -1,10 +1,16 @@
 package id.application.pointofsales.presentation.feature.home
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.application.core.data.local.database.cart.CartKeys
 import id.application.pointofsales.R
+import id.application.pointofsales.databinding.DialogPrintBillsBinding
 import id.application.pointofsales.databinding.FragmentHomeBinding
 import id.application.pointofsales.presentation.adapter.BouquetAdapter
 import id.application.pointofsales.presentation.adapter.BouquetItem
@@ -119,21 +125,60 @@ class HomeFragment :
         }
     }
 
-    private fun observeVm(){
-        viewModel.getCartList()
-        viewModel.cartList.observe(viewLifecycleOwner){ cartList ->
-            adapterProduct.setlistCart(cartList)
+    override fun initListener() {
+        with(binding){
+            chipGroup.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.chip_all -> adapter.updateData(allProducts)
+                    R.id.chip_bouqet -> adapter.updateData(bouquetProducts)
+                    R.id.chip_bouqet_materials -> adapter.updateData(bahanBouquetProducts)
+                    R.id.chip_bouqet_accesories -> adapter.updateData(accessoriesProducts)
+                }
+            }
+            btnOrder.setOnClickListener {
+                showDialogConfirmSaveData()
+            }
+
         }
     }
 
-    override fun initListener() {
-        binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.chip_all -> adapter.updateData(allProducts)
-                R.id.chip_bouqet -> adapter.updateData(bouquetProducts)
-                R.id.chip_bouqet_materials -> adapter.updateData(bahanBouquetProducts)
-                R.id.chip_bouqet_accesories -> adapter.updateData(accessoriesProducts)
+
+    private fun observeVm(){
+        with(viewModel){
+            getCartList()
+            cartList.observe(viewLifecycleOwner){ cartList ->
+                adapterProduct.setlistCart(cartList)
             }
         }
     }
+
+
+    private var activeDialog: AlertDialog? = null
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun showDialogConfirmSaveData() {
+        activeDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
+        }
+        val binding: DialogPrintBillsBinding = DialogPrintBillsBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(requireContext(), 0).create()
+        dialog.apply {
+            setView(binding.root)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCanceledOnTouchOutside(false)
+        }.show()
+        activeDialog = dialog
+        with(binding) {
+            ivClose.setOnClickListener {
+                dialog.dismiss()
+                activeDialog = null
+            }
+        }
+        binding.root.setOnTouchListener { _, _ ->
+            true
+        }
+    }
+
 }

@@ -287,7 +287,7 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <Button
-                android:id="@+id/btn_print"
+                android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -295,7 +295,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="10dp"
-                android:text="Print Bills"
+                android:text="Create Order"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

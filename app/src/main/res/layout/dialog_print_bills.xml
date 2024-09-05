@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    app:cardCornerRadius="24dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        app:cardCornerRadius="24dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_close"
+                android:background="@drawable/rounded_bottom_left_red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Print Bills"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Transaction"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_title"/>
+
+            <TextView
+                android:id="@+id/tv_id_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Transaction : 43256782"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_transaction"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_result_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_title_total"
+                app:layout_constraintTop_toBottomOf="@+id/tv_id_transaction" />
+
+            <TextView
+                android:id="@+id/tv_title_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_print"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_transaction"/>
+
+            <TextView
+                android:id="@+id/tv_result_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. 120.000"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_print"/>
+
+            <Button
+                android:id="@+id/btn_print"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_color"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:text="Print"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
