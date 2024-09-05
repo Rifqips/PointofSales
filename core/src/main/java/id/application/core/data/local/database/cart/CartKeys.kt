@@ -22,5 +22,5 @@ data class CartKeys (
     @field:ColumnInfo(name = "hargaJual")
     val hargaJual: Int,
     @field:ColumnInfo("quantity")
-    var quantity: Int = 1,
+    var quantity: Int,
 )

@@ -17,6 +17,10 @@ import id.application.pointofsales.presentation.adapter.BouquetItem
 import id.application.pointofsales.presentation.adapter.ProductAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
 import id.application.pointofsales.utils.BaseFragment
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment :
@@ -114,9 +118,24 @@ class HomeFragment :
             )
             viewModel.insertCart(cartKey)
         }
-        adapterProduct = ProductAdapter(emptyList()){
-            viewModel.deleteProductById(it.id.toString())
-        }
+        adapterProduct = ProductAdapter(emptyList(),
+            onDelete = {
+                viewModel.deleteProductById(it.id.toString())
+                       },
+            itemSelectedPlus = {
+                val newQuantity = it.quantity + 1
+                val newHargaJual = it.hargaJual / it.quantity * newQuantity
+                viewModel.updateCart(it.id.toString(), newQuantity, newHargaJual)
+            },
+            itemSelectedMinus = {
+                if (it.quantity > 1) {
+                    val newQuantity = it.quantity - 1
+                    val newHargaJual = it.hargaJual / it.quantity * newQuantity
+                    viewModel.updateCart(it.id.toString(), newQuantity, newHargaJual)
+                }
+            }
+
+        )
         with(binding) {
             rvListProduct.layoutManager = GridLayoutManager(context, 3)
             rvListProduct.adapter = adapter
@@ -142,12 +161,14 @@ class HomeFragment :
         }
     }
 
-
     private fun observeVm(){
         with(viewModel){
             getCartList()
             cartList.observe(viewLifecycleOwner){ cartList ->
                 adapterProduct.setlistCart(cartList)
+            }
+            viewModel.totalHargaJual.observe(viewLifecycleOwner) { total ->
+                binding.tvResultTotal.text = "Total: $total"
             }
         }
     }

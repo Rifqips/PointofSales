@@ -30,11 +30,17 @@ class VmApplication(
         }
     }
 
+    fun updateCart(id: String, quantity: Int, hargaJual: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            roomRepository.updateCart(id, quantity, hargaJual)
+        }
+    }
+
+    val totalHargaJual: LiveData<Int> = roomRepository.getTotalHargaJual()
+
     fun deleteProductById(id: String){
         viewModelScope.launch(Dispatchers.IO){
             roomRepository.deleteProductById(id)
         }
     }
-
-
 }

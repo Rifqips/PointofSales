@@ -10,6 +10,10 @@ interface ApplicationRoomRepository {
 
     fun getCartList(): LiveData<List<CartKeys>>
 
+    fun updateCart(id: String, quantity: Int, hargaJual: Int)
+
+    fun getTotalHargaJual(): LiveData<Int>
+
     fun deleteProductById(id: String)
 
 
@@ -25,6 +29,14 @@ class ApplicationRoomRepositoryImpl(
 
     override fun getCartList(): LiveData<List<CartKeys>> {
         return cartlistDao.getCartList()
+    }
+
+    override fun updateCart(id: String, quantity: Int, hargaJual: Int) {
+        return cartlistDao.updateCart(id, quantity, hargaJual)
+    }
+
+    override fun getTotalHargaJual(): LiveData<Int> {
+        return cartlistDao.getTotalHargaJual()
     }
 
     override fun deleteProductById(id: String) {

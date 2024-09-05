@@ -9,7 +9,9 @@ import id.application.pointofsales.databinding.ItemCartProductBinding
 
 class ProductAdapter(
     private var items: List<CartKeys>,
-    private var onDelete : (CartKeys) -> Unit
+    private var onDelete : (CartKeys) -> Unit,
+    private val itemSelectedPlus : (CartKeys) -> Unit,
+    private val itemSelectedMinus : (CartKeys) -> Unit,
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(val binding: ItemCartProductBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -18,19 +20,20 @@ class ProductAdapter(
                 ivProduct.load(item.url)
                 tvDescripionProduct.text = item.name
                 tvTitleStorage.text = "Bahan: Rp ${item.bahan}"
-                tvProductPrice.text = "Harga Jual: Rp ${item.hargaJual}"
-                var count = 1
-                tvCountNumber.text = count.toString()
+
+                tvCountNumber.text = item.quantity.toString()
                 tvMinus.setOnClickListener {
-                    if (count > 1) {
-                        count--
-                        tvCountNumber.text = count.toString()
+                    tvCountNumber.text = item.quantity.toString()
+                    if (item.quantity > 1) {
+                        itemSelectedMinus.invoke(item)
                     }
                 }
                 tvPlus.setOnClickListener {
-                    count++
-                    tvCountNumber.text = count.toString()
+                    tvCountNumber.text = item.quantity.toString()
+                    itemSelectedPlus.invoke(item)
                 }
+                tvProductPrice.text = item.hargaJual.toString()
+
                 ivDelete.setOnClickListener {
                     onDelete.invoke(item)
                 }
