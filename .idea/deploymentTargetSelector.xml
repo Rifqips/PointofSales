@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-09-01T08:07:32.420961Z">
+        <DropdownSelection timestamp="2024-09-10T11:47:48.486806500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/rifqipadisiliwangi/.android/avd/Pixel_Tablet_API_34.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\lesta\.android\avd\Samsung_S9_FE_API_Tiramisu.avd" />
             </handle>
           </Target>
         </DropdownSelection>
