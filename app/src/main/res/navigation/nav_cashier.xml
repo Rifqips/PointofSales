@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_cashier"
-    app:startDestination="@id/cashierFragmentFragment">
+    app:startDestination="@id/cashierFragment">
 
     <fragment
-        android:id="@+id/cashierFragmentFragment"
+        android:id="@+id/cashierFragment"
         android:name="id.application.pointofsales.presentation.feature.cashier.CashierFragmentFragment"
         android:label="fragment_cashier_fragment"
         tools:layout="@layout/fragment_cashier_fragment" />
