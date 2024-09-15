@@ -31,19 +31,20 @@
             android:id="@+id/tvBouquetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="elkfniefo"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_marginTop="10dp"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvBahan"
             android:text="elkfniefo"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvJasa"
+            android:visibility="gone"
             android:text="elkfniefo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -51,6 +52,7 @@
         <TextView
             android:id="@+id/tvLaba"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:text="elkfniefo"/>
 
@@ -58,8 +60,7 @@
             android:id="@+id/tvHargaJual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="elkfniefo"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins"/>
 
 
         <Button

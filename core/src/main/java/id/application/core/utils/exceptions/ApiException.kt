@@ -1,6 +1,5 @@
 package id.application.core.utils.exceptions
 
-import com.google.gson.Gson
 import retrofit2.Response
 
 

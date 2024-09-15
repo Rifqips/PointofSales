@@ -2,14 +2,12 @@ package id.application.pointofsales.presentation.feature
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import id.application.pointofsales.R
 import id.application.pointofsales.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

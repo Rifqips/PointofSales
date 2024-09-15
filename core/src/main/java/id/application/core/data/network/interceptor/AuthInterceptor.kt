@@ -2,7 +2,6 @@ package id.application.core.data.network.interceptor
 
 import android.content.Context
 import id.application.core.data.datasource.AppPreferenceDataSource
-import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 

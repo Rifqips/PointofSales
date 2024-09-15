@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/cashierFragment"
-        android:name="id.application.pointofsales.presentation.feature.cashier.CashierFragmentFragment"
+        android:name="id.application.pointofsales.presentation.feature.cashier.CashierFragment"
         android:label="fragment_cashier_fragment"
-        tools:layout="@layout/fragment_cashier_fragment" />
+        tools:layout="@layout/fragment_cashier" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="id.application.pointofsales.presentation.feature.setting.SettingFragment"

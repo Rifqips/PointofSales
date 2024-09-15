@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuCashier"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_home"
         android:title="Cashier" />
     <item
         android:id="@+id/menuProduct"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_product"
         android:title="Product" />
     <item
         android:id="@+id/menuSetting"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_setting"
         android:title="Setting" />
 </menu>

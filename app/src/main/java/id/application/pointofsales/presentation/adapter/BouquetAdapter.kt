@@ -19,7 +19,7 @@ class BouquetAdapter(
                 tvBahan.text = "Bahan: Rp ${item.bahan}"
                 tvJasa.text = "Jasa: Rp ${item.jasa}"
                 tvLaba.text = "Laba: Rp ${item.laba}"
-                tvHargaJual.text = "Harga Jual: Rp ${item.hargaJual}"
+                tvHargaJual.text = "Rp. ${item.hargaJual}"
                 btnAddCart.setOnClickListener {
                     onButtonClick.invoke(item)
                 }
