@@ -11,13 +11,18 @@
         android:label="fragment_cashier_fragment"
         tools:layout="@layout/fragment_cashier" />
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="id.application.pointofsales.presentation.feature.setting.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        android:id="@+id/accountFragment"
+        android:name="id.application.pointofsales.presentation.feature.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/productFragment"
         android:name="id.application.pointofsales.presentation.feature.product.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="id.application.pointofsales.presentation.feature.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

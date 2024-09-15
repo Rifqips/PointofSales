@@ -1,10 +1,11 @@
-package id.application.pointofsales.presentation.adapter
+package id.application.pointofsales.presentation.adapter.cashier
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.application.pointofsales.databinding.ItemBouquetBinding
+import id.application.pointofsales.utils.Utils.formatRupiah
 
 class BouquetAdapter(
     private var items: List<BouquetItem>,
@@ -19,7 +20,7 @@ class BouquetAdapter(
                 tvBahan.text = "Bahan: Rp ${item.bahan}"
                 tvJasa.text = "Jasa: Rp ${item.jasa}"
                 tvLaba.text = "Laba: Rp ${item.laba}"
-                tvHargaJual.text = "Rp. ${item.hargaJual}"
+                tvHargaJual.text = formatRupiah(item.hargaJual)
                 btnAddCart.setOnClickListener {
                     onButtonClick.invoke(item)
                 }

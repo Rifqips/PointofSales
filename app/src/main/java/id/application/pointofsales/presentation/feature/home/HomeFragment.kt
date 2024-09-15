@@ -35,8 +35,11 @@ class HomeFragment :
                     R.id.menuProduct -> {
                         navController.navigate(R.id.productFragment)
                     }
-                    R.id.menuSetting -> {
-                        navController.navigate(R.id.settingFragment)
+                    R.id.menuHistory -> {
+                        navController.navigate(R.id.historyFragment)
+                    }
+                    R.id.menuAccount -> {
+                        navController.navigate(R.id.accountFragment)
                     }
                 }
                 true

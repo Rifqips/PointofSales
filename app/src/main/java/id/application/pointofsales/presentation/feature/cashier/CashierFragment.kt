@@ -10,9 +10,9 @@ import id.application.core.data.local.database.cart.CartKeys
 import id.application.pointofsales.R
 import id.application.pointofsales.databinding.DialogPrintBillsBinding
 import id.application.pointofsales.databinding.FragmentCashierBinding
-import id.application.pointofsales.presentation.adapter.BouquetAdapter
-import id.application.pointofsales.presentation.adapter.BouquetItem
-import id.application.pointofsales.presentation.adapter.ProductAdapter
+import id.application.pointofsales.presentation.adapter.cashier.BouquetAdapter
+import id.application.pointofsales.presentation.adapter.cashier.BouquetItem
+import id.application.pointofsales.presentation.adapter.cashier.ProductAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
 import id.application.pointofsales.utils.BaseFragment
 import id.application.pointofsales.utils.Utils.formatRupiah

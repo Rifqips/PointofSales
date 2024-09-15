@@ -78,8 +78,6 @@
 
     </HorizontalScrollView>
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_product"
         android:layout_width="0dp"

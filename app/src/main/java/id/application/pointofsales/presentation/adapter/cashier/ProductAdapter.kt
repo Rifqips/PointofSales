@@ -1,4 +1,4 @@
-package id.application.pointofsales.presentation.adapter
+package id.application.pointofsales.presentation.adapter.cashier
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.application.core.data.local.database.cart.CartKeys
 import id.application.pointofsales.databinding.ItemCartProductBinding
+import id.application.pointofsales.utils.Utils.formatRupiah
 
 class ProductAdapter(
     private var items: List<CartKeys>,
@@ -32,7 +33,7 @@ class ProductAdapter(
                     tvCountNumber.text = item.quantity.toString()
                     itemSelectedPlus.invoke(item)
                 }
-                tvProductPrice.text = item.hargaJual.toString()
+                tvProductPrice.text = formatRupiah(item.hargaJual)
 
                 ivDelete.setOnClickListener {
                     onDelete.invoke(item)
