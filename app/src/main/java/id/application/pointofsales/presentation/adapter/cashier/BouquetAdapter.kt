@@ -16,16 +16,13 @@ class BouquetAdapter(
         fun bind(item: BouquetItem) {
             with(binding){
                 ivUrl.load(item.url)
-                tvBouquetName.text = item.name
-                tvBahan.text = "Bahan: Rp ${item.bahan}"
-                tvJasa.text = "Jasa: Rp ${item.jasa}"
-                tvLaba.text = "Laba: Rp ${item.laba}"
+                tvNameProduct.text = item.name
+                tvTypeProduct.text = "Bouqet"
                 tvHargaJual.text = formatRupiah(item.hargaJual)
                 btnAddCart.setOnClickListener {
                     onButtonClick.invoke(item)
                 }
             }
-
         }
     }
 

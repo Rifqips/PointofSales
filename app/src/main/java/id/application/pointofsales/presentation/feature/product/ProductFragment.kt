@@ -1,6 +1,11 @@
 package id.application.pointofsales.presentation.feature.product
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
+import id.application.pointofsales.databinding.DialogDetailStatusProductBinding
 import id.application.pointofsales.databinding.FragmentProductBinding
 import id.application.pointofsales.presentation.adapter.history.HistoryAdapter
 import id.application.pointofsales.presentation.adapter.history.HistoryItem
@@ -58,6 +63,7 @@ class ProductFragment :
         )
 
         productAdapter = ProductStatusAdapter(productList) { product ->
+            showDialogConfirmSaveData()
         }
         binding.rvProductStatus.adapter = productAdapter
         val gridLayoutManager = GridLayoutManager(requireContext(), 3)
@@ -68,4 +74,36 @@ class ProductFragment :
     override fun initListener() {
         // Set listeners for other views like search, filter etc.
     }
+
+
+    private var activeDialog: AlertDialog? = null
+
+    private fun showDialogConfirmSaveData() {
+        activeDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
+        }
+        val binding: DialogDetailStatusProductBinding = DialogDetailStatusProductBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(requireContext(), 0).create()
+        dialog.apply {
+            setView(binding.root)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCanceledOnTouchOutside(false)
+        }.show()
+        activeDialog = dialog
+
+
+        with(binding) {
+            ivUrl.load("https://i.pinimg.com/736x/c7/26/40/c72640b4c7fc07895b392c98755a1164.jpg")
+            ivClose.setOnClickListener {
+                dialog.dismiss()
+                activeDialog = null
+            }
+        }
+        binding.root.setOnTouchListener { _, _ ->
+            true
+        }
+    }
+
 }

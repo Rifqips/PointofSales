@@ -8,7 +8,17 @@
     <color name="text_secondary_color">#D7D7D7</color>
     <color name="button_color">#E0DAD2</color>
     <color name="button_red">#F44336</color>
-    <color name="light_yellow">#FBBE33</color>
+    <color name="light_yellow">#FFDD44</color>
     <color name="light_blue">#add8e6</color>
+
+    <color name="blue_light_primary">#42A5F5</color>
+    <color name="blue_light_secondary">#64B5F6</color>
+    <color name="blue_light_accent">#90CAF9</color>
+    <color name="blue_light_accent_reduce_opacity">#6690CAF9</color>
+    <color name="blue_light_text">#1E88E5</color>
+    <color name="blue_light_disabled">#BBDEFB</color>
+    <color name="blue_light_highlight">#2196F3</color>
+    <color name="blue_light_background">#F4FBFD</color>
+
 
 </resources>

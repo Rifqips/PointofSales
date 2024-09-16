@@ -48,6 +48,7 @@
         <TextView
             android:id="@+id/tv_datetime"
             android:text="10-10-2024"
+            android:visibility="gone"
             android:fontFamily="@font/poppins"
             android:textColor="@color/text_color"
             android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
             android:id="@+id/btn_add_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/button_color"
+            android:backgroundTint="@color/blue_light_disabled"
             android:fontFamily="@font/poppins_semibold"
             android:paddingVertical="10dp"
             android:paddingHorizontal="24dp"

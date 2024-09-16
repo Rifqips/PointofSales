@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             tools:text="Description"
             android:textSize="10sp"
+            android:visibility="gone"
             android:fontFamily="@font/poppins"
             android:textColor="?attr/colorControlNormal"/>
 

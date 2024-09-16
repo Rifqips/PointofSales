@@ -28,7 +28,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tvBouquetName"
+            android:id="@+id/tv_type_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
@@ -36,25 +36,12 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvBahan"
-            android:text="elkfniefo"
-            android:visibility="gone"
+            android:id="@+id/tv_name_product"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvJasa"
-            android:visibility="gone"
-            android:text="elkfniefo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvLaba"
-            android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:text="elkfniefo"/>
+            android:fontFamily="@font/poppins"
+            android:textSize="14sp"
+            />
 
         <TextView
             android:id="@+id/tvHargaJual"
@@ -67,7 +54,7 @@
             android:id="@+id/btn_add_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/button_color"
+            android:backgroundTint="@color/blue_light_disabled"
             android:fontFamily="@font/poppins_semibold"
             android:paddingVertical="10dp"
             android:paddingHorizontal="24dp"

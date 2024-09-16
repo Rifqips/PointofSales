@@ -9,15 +9,17 @@
 
     <EditText
         android:id="@+id/search_bar"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner_search"
         android:backgroundTint="@color/white"
         android:hint="Search..."
         android:paddingHorizontal="20dp"
+        android:layout_marginEnd="20dp"
         android:queryHint="Search..."
+        app:layout_constraintEnd_toStartOf="@+id/tv_order"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:subtitleTextColor="@color/background_color"
@@ -47,16 +49,20 @@
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="All" />
+                android:checked="false"
+                android:text="All"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/chip_background_color"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bouqet"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Bouquet" />
+                android:checked="true"
+                android:text="Bouquet"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/chip_background_color"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bouqet_materials"
@@ -64,7 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Bahan bouquet" />
+                android:text="Bahan bouquet"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/chip_background_color"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bouqet_accesories"
@@ -72,7 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Accesories" />
+                android:text="Accesories"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/chip_background_color"/>
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -117,7 +127,7 @@
         android:layout_marginVertical="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cv_bills"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chipGroup"
+        app:layout_constraintStart_toEndOf="@+id/sv_chip"
         app:layout_constraintTop_toBottomOf="@+id/tv_desc_order" />
 
 
@@ -221,7 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:backgroundTint="@color/button_color"
+                android:backgroundTint="@color/blue_light_primary"
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="10dp"
