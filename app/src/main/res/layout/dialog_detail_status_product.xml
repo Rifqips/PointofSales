@@ -135,13 +135,33 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
+                android:id="@+id/tv_transaction_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Transaksi: Pre order"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cashier_name"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_customer_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08512345678"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tv_transaction_type"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
                 android:id="@+id/tv_harga_jual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp.100.000,00"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cashier_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_customer_phone_number"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <EditText
