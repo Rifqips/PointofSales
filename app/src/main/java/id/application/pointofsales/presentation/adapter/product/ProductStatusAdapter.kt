@@ -3,6 +3,7 @@ package id.application.pointofsales.presentation.adapter.product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.application.pointofsales.R
@@ -24,6 +25,11 @@ class ProductStatusAdapter(
             binding.tvDatetime.text = product.datetime
             binding.tvHargaJual.text = product.salePrice
             binding.tvStatus.text = product.status
+            if (product.status == "Belum Lunas") {
+                binding.cvStatus.backgroundTintList =
+                    ContextCompat.getColorStateList(itemView.context, R.color.light_yellow)
+            }
+
             binding.btnAddCart.setOnClickListener {
                 onClick(product)
             }

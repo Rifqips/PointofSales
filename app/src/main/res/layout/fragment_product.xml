@@ -122,12 +122,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Total History"
+        android:text="Total Product"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_history"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_filter"
         app:layout_constraintStart_toStartOf="@+id/btn_search"
-        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+        app:layout_constraintTop_toTopOf="@+id/iv_filter" />
 
     <TextView
         android:id="@+id/tv_result_subtotal"
