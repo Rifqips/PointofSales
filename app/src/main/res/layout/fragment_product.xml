@@ -9,7 +9,7 @@
     tools:context=".presentation.feature.product.ProductFragment">
 
     <TextView
-        android:id="@+id/tv_title_history"
+        android:id="@+id/tv_title_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -20,5 +20,136 @@
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_corner_search"
+        android:backgroundTint="@color/white"
+        android:hint="Search..."
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp"
+        android:queryHint="Search..."
+        app:layout_constraintEnd_toStartOf="@+id/btn_search"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_product"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_product"
+        app:subtitleTextColor="@color/background_color"
+        app:titleTextColor="@color/text_color" />
+
+    <HorizontalScrollView
+        android:id="@+id/sv_chip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectionRequired="false"
+            app:singleLine="true"
+            app:singleSelection="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="All" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bouqet"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Bouquet" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bouqet_materials"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Bahan bouquet" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bouqet_accesories"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Accesories" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/iv_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/sv_chip"
+        app:layout_constraintTop_toTopOf="@+id/sv_chip"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_chip"/>
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_blue"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="Search"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_bar" />
+
+    <TextView
+        android:id="@+id/tv_subtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Total History"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_history"
+        app:layout_constraintStart_toStartOf="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+
+    <TextView
+        android:id="@+id/tv_result_subtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="20"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_subtotal"
+        app:layout_constraintStart_toEndOf="@+id/tv_subtotal"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtotal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_product_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_chip" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
