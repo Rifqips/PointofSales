@@ -1,0 +1,47 @@
+package id.application.pointofsales.presentation.feature.admin_users
+
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.application.pointofsales.databinding.FragmentAdminUsersBinding
+import id.application.pointofsales.presentation.adapter.admin_users.User
+import id.application.pointofsales.presentation.adapter.admin_users.UserAdapter
+import id.application.pointofsales.presentation.viewmodel.VmApplication
+import id.application.pointofsales.utils.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class AdminUsersFragment :
+    BaseFragment<FragmentAdminUsersBinding, VmApplication>(FragmentAdminUsersBinding::inflate) {
+    override val viewModel: VmApplication by viewModel()
+
+    private lateinit var userAdapter: UserAdapter
+
+    private val sampleUsers = listOf(
+        User("Rifqi Padi Siliwangi", "AMERTA.PADI", "085123456780", "Staff - Cashier", "R"),
+        User("Aulia Rahman", "AMERTA.AULIA", "085678123456", "Staff - Admin", "A"),
+        User("Joko Purwanto", "AMERTA.PURWANTO", "085678123456", "Staff - Admin", "A"),
+        User("Tejo Sutejo", "AMERTA.TEJO", "085678123456", "Staff - Admin", "A"),
+        User("Puspitasari F", "AMERTA.PUSPITA", "085678123456", "Staff - Admin", "A"),
+    )
+
+    override fun initView() {
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        userAdapter = UserAdapter(sampleUsers) { user ->
+            showUserDetails(user)
+        }
+
+        binding.rvListUsers.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = userAdapter
+        }
+    }
+
+    private fun showUserDetails(user: User) {
+        Toast.makeText(requireContext(), "Clicked on: ${user.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun initListener() {}
+}

@@ -12,6 +12,10 @@
         android:icon="@drawable/ic_history"
         android:title="History" />
     <item
+        android:id="@+id/menuUsers"
+        android:icon="@drawable/ic_users_management"
+        android:title="History" />
+    <item
         android:id="@+id/menuAccount"
         android:icon="@drawable/ic_account"
         android:title="Account" />

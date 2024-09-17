@@ -8,7 +8,6 @@ import id.application.pointofsales.presentation.viewmodel.VmApplication
 import id.application.pointofsales.utils.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, VmApplication>(FragmentHomeBinding::inflate) {
 
@@ -38,6 +37,9 @@ class HomeFragment :
                     R.id.menuHistory -> {
                         navController.navigate(R.id.historyFragment)
                     }
+                    R.id.menuUsers -> {
+                        navController.navigate(R.id.adminUsersFragment)
+                    }
                     R.id.menuAccount -> {
                         navController.navigate(R.id.accountFragment)
                     }
@@ -47,6 +49,3 @@ class HomeFragment :
         }
     }
 }
-
-
-

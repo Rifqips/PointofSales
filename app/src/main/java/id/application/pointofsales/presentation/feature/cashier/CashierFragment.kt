@@ -164,7 +164,7 @@ class CashierFragment :
                 adapterProduct.setlistCart(cartList)
             }
             viewModel.totalHargaJual.observe(viewLifecycleOwner) { total ->
-                binding.tvResultTotal.text = formatRupiah(total)
+                if (total != null) binding.tvResultTotal.text = formatRupiah(total)
             }
 
         }
