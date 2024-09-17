@@ -2,7 +2,6 @@ package id.application.pointofsales.presentation.feature.admin_users
 
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.application.pointofsales.databinding.FragmentAdminUsersBinding
 import id.application.pointofsales.presentation.adapter.admin_users.User
 import id.application.pointofsales.presentation.adapter.admin_users.UserAdapter
@@ -19,9 +18,9 @@ class AdminUsersFragment :
     private val sampleUsers = listOf(
         User("Rifqi Padi Siliwangi", "AMERTA.PADI", "085123456780", "Staff - Cashier", "R"),
         User("Aulia Rahman", "AMERTA.AULIA", "085678123456", "Staff - Admin", "A"),
-        User("Joko Purwanto", "AMERTA.PURWANTO", "085678123456", "Staff - Admin", "A"),
-        User("Tejo Sutejo", "AMERTA.TEJO", "085678123456", "Staff - Admin", "A"),
-        User("Puspitasari F", "AMERTA.PUSPITA", "085678123456", "Staff - Admin", "A"),
+        User("Joko Purwanto", "AMERTA.PURWANTO", "085678123456", "Staff - Admin", "J"),
+        User("Tejo Sutejo", "AMERTA.TEJO", "085678123456", "Staff - Admin", "T"),
+        User("Puspitasari F", "AMERTA.PUSPITA", "085678123456", "Staff - Admin", "P"),
     )
 
     override fun initView() {

@@ -40,6 +40,12 @@ class HomeFragment :
                     R.id.menuUsers -> {
                         navController.navigate(R.id.adminUsersFragment)
                     }
+                    R.id.menuManagementTransactions -> {
+                        navController.navigate(R.id.adminProductsFragment)
+                    }
+                    R.id.menuManagementHistories -> {
+                        navController.navigate(R.id.adminHistoryFragment)
+                    }
                     R.id.menuAccount -> {
                         navController.navigate(R.id.accountFragment)
                     }

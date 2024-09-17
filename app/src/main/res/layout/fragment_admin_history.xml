@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".presentation.feature.admin_users.AdminUsersFragment">
+    tools:context=".presentation.feature.admin_history.AdminHistoryFragment">
+
 
     <TextView
         android:id="@+id/tv_title_history"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="User Management"
+        android:text="Histories Management"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="26sp"
@@ -42,7 +42,6 @@
         app:subtitleTextColor="@color/background_color"
         app:titleTextColor="@color/text_color" />
 
-
     <Button
         android:id="@+id/btn_search"
         android:layout_width="200dp"
@@ -51,8 +50,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:paddingHorizontal="24dp"
         android:paddingVertical="10dp"
-        android:text="Add User"
-        app:icon="@drawable/ic_plus"
+        android:text="Print Histories"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_search"

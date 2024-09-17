@@ -16,6 +16,7 @@
         android:background="@drawable/rounded_corner_search"
         android:backgroundTint="@color/white"
         android:hint="Search..."
+        android:maxLines="1"
         android:paddingHorizontal="20dp"
         android:layout_marginEnd="20dp"
         android:queryHint="Search..."

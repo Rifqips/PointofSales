@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.feature.history.HistoryFragment">
+    android:background="@color/background_color"
+    android:padding="10dp"
+    tools:context=".presentation.feature.admin_products.AdminProductsFragment">
 
     <TextView
         android:id="@+id/tv_title_history"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="History"
+        android:text="Products Management"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="26sp"
@@ -130,40 +130,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/search_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/search_bar" />
-
-    <TextView
-        android:id="@+id/tv_subtotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Total History"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_history"
-        app:layout_constraintEnd_toStartOf="@+id/tv_result_subtotal"
-        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
-
-    <TextView
-        android:id="@+id/tv_result_subtotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/poppins"
-        android:text="20"
-        android:textColor="@color/blue_light_text"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_subtotal"
-        app:layout_constraintEnd_toEndOf="@+id/btn_search"
-        app:layout_constraintTop_toTopOf="@+id/tv_subtotal" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_history"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_chip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

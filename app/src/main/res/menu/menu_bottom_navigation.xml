@@ -14,7 +14,15 @@
     <item
         android:id="@+id/menuUsers"
         android:icon="@drawable/ic_users_management"
-        android:title="History" />
+        android:title="Users" />
+    <item
+        android:id="@+id/menuManagementTransactions"
+        android:icon="@drawable/ic_management_transaction"
+        android:title="Transactions" />
+    <item
+        android:id="@+id/menuManagementHistories"
+        android:icon="@drawable/ic_management_history"
+        android:title="Histories" />
     <item
         android:id="@+id/menuAccount"
         android:icon="@drawable/ic_account"

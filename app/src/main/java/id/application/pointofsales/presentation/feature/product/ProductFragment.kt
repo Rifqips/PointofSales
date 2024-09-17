@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import id.application.pointofsales.databinding.DialogDetailStatusProductBinding
 import id.application.pointofsales.databinding.FragmentProductBinding
-import id.application.pointofsales.presentation.adapter.history.HistoryAdapter
-import id.application.pointofsales.presentation.adapter.history.HistoryItem
 import id.application.pointofsales.presentation.adapter.product.ProductStatus
 import id.application.pointofsales.presentation.adapter.product.ProductStatusAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
