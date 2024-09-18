@@ -1,7 +1,13 @@
 package id.application.pointofsales.presentation.feature.admin_users
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import id.application.pointofsales.databinding.DialogCreateUserBinding
+import id.application.pointofsales.databinding.DialogPrintBillsBinding
 import id.application.pointofsales.databinding.FragmentAdminUsersBinding
 import id.application.pointofsales.presentation.adapter.admin_users.User
 import id.application.pointofsales.presentation.adapter.admin_users.UserAdapter
@@ -42,5 +48,39 @@ class AdminUsersFragment :
         Toast.makeText(requireContext(), "Clicked on: ${user.name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun initListener() {}
+    override fun initListener() {
+        with(binding){
+            btnAddUser.setOnClickListener {
+                showDialogAddUsers()
+            }
+        }
+    }
+
+    private var activeDialog: AlertDialog? = null
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun showDialogAddUsers() {
+        activeDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
+        }
+        val binding: DialogCreateUserBinding = DialogCreateUserBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(requireContext(), 0).create()
+        dialog.apply {
+            setView(binding.root)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCanceledOnTouchOutside(false)
+        }.show()
+        activeDialog = dialog
+        with(binding) {
+            ivClose.setOnClickListener {
+                dialog.dismiss()
+                activeDialog = null
+            }
+        }
+        binding.root.setOnTouchListener { _, _ ->
+            true
+        }
+    }
 }
