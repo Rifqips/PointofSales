@@ -12,6 +12,7 @@ class HistoryFragment :
     BaseFragment<FragmentHistoryBinding, VmApplication>(FragmentHistoryBinding::inflate) {
 
     override val viewModel: VmApplication by viewModel()
+
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun initView() {

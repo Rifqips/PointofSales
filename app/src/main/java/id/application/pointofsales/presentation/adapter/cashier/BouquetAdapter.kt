@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import id.application.pointofsales.databinding.ItemBouquetBinding
+import id.application.pointofsales.databinding.ItemProductsBinding
 import id.application.pointofsales.utils.Utils.formatRupiah
 
 class BouquetAdapter(
@@ -12,7 +12,7 @@ class BouquetAdapter(
     private var onButtonClick: (BouquetItem) -> Unit,
 ) : RecyclerView.Adapter<BouquetAdapter.BouquetViewHolder>() {
 
-    inner class BouquetViewHolder(val binding: ItemBouquetBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class BouquetViewHolder(val binding: ItemProductsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BouquetItem) {
             with(binding){
                 ivUrl.load(item.url)
@@ -27,7 +27,7 @@ class BouquetAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BouquetViewHolder {
-        val binding = ItemBouquetBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemProductsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BouquetViewHolder(binding)
     }
 

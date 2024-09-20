@@ -36,7 +36,7 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="15dp"
         android:queryHint="Search..."
-        app:layout_constraintEnd_toStartOf="@+id/btn_add_user"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create_user"
         app:layout_constraintStart_toStartOf="@+id/tv_title_history"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_history"
         app:subtitleTextColor="@color/background_color"
@@ -44,7 +44,7 @@
 
 
     <Button
-        android:id="@+id/btn_add_user"
+        android:id="@+id/btn_create_user"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue_light_primary"
@@ -63,6 +63,7 @@
         android:id="@+id/rv_list_users"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/et_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

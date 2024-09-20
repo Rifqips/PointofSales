@@ -140,7 +140,7 @@ class CashierFragment :
     }
 
     override fun initListener() {
-        with(binding){
+        with(binding) {
             chipGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.chip_all -> adapter.updateData(allProducts)
@@ -157,14 +157,15 @@ class CashierFragment :
     }
 
     @SuppressLint("SetTextI18n")
-    private fun observeVm(){
-        with(viewModel){
+    private fun observeVm() {
+        with(viewModel) {
             getCartList()
-            cartList.observe(viewLifecycleOwner){ cartList ->
+            cartList.observe(viewLifecycleOwner) { cartList ->
                 adapterProduct.setlistCart(cartList)
             }
             viewModel.totalHargaJual.observe(viewLifecycleOwner) { total ->
-                if (total != null) binding.tvResultTotal.text = formatRupiah(total)
+                if (total != null) binding.tvResultSubtotal.text =
+                    formatRupiah(total) else binding.tvResultSubtotal.text = formatRupiah(0)
             }
 
         }

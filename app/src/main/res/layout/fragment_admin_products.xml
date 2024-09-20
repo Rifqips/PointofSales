@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/search_bar"
+        android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,11 +35,27 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="15dp"
         android:queryHint="Search..."
-        app:layout_constraintEnd_toStartOf="@+id/btn_search"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create_products"
         app:layout_constraintStart_toStartOf="@+id/tv_title_history"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_history"
         app:subtitleTextColor="@color/background_color"
         app:titleTextColor="@color/text_color" />
+
+    <Button
+        android:id="@+id/btn_create_products"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_light_primary"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="Create Products"
+        app:icon="@drawable/ic_plus"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_search" />
 
     <HorizontalScrollView
         android:id="@+id/sv_chip"
@@ -47,7 +64,7 @@
         android:layout_marginTop="10dp"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar">
+        app:layout_constraintTop_toBottomOf="@+id/et_search">
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
@@ -103,32 +120,51 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/iv_filter"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Filter"
         android:textAllCaps="false"
         app:icon="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_chip"
         app:layout_constraintStart_toEndOf="@+id/sv_chip"
         app:layout_constraintTop_toTopOf="@+id/sv_chip"
-        app:layout_constraintBottom_toBottomOf="@+id/sv_chip"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         app:strokeColor="@color/blue_light_disabled"
         app:strokeWidth="1dp" />
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/tv_subtotal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_light_primary"
+        android:layout_marginEnd="10dp"
         android:fontFamily="@font/poppins_semibold"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="10dp"
-        android:text="Search"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_bar" />
+        android:text="Total Products"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_filter"
+        app:layout_constraintEnd_toStartOf="@+id/tv_result_subtotal"
+        app:layout_constraintTop_toTopOf="@+id/iv_filter" />
+
+    <TextView
+        android:id="@+id/tv_result_subtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins"
+        android:text="20"
+        android:textColor="@color/blue_light_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_subtotal"
+        app:layout_constraintEnd_toEndOf="@+id/btn_create_products"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtotal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sv_chip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

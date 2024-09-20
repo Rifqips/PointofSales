@@ -6,8 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import id.application.pointofsales.databinding.DialogCreateUserBinding
-import id.application.pointofsales.databinding.DialogPrintBillsBinding
+import id.application.pointofsales.databinding.DialogAdminCreateUserBinding
 import id.application.pointofsales.databinding.FragmentAdminUsersBinding
 import id.application.pointofsales.presentation.adapter.admin_users.User
 import id.application.pointofsales.presentation.adapter.admin_users.UserAdapter
@@ -49,8 +48,8 @@ class AdminUsersFragment :
     }
 
     override fun initListener() {
-        with(binding){
-            btnAddUser.setOnClickListener {
+        with(binding) {
+            btnCreateUser.setOnClickListener {
                 showDialogAddUsers()
             }
         }
@@ -65,7 +64,7 @@ class AdminUsersFragment :
                 dialog.dismiss()
             }
         }
-        val binding: DialogCreateUserBinding = DialogCreateUserBinding.inflate(layoutInflater)
+        val binding: DialogAdminCreateUserBinding = DialogAdminCreateUserBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(requireContext(), 0).create()
         dialog.apply {
             setView(binding.root)
