@@ -4,43 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.application.core.data.local.database.cart.CartKeys
-import id.application.core.domain.repository.ApplicationRoomRepository
-import kotlinx.coroutines.Dispatchers
+import id.application.core.data.network.model.auth.ItemRequestLogin
+import id.application.core.data.network.model.auth.ItemResponseLogin
+import id.application.core.domain.repository.ApplicationRepository
+import id.application.core.utils.ResultWrapper
 import kotlinx.coroutines.launch
 
 class VmApplication(
-    private val roomRepository: ApplicationRoomRepository
+    private val repository: ApplicationRepository
 ) : ViewModel() {
 
-    private val _cartList = MutableLiveData<List<CartKeys>>()
-    val cartList : LiveData<List<CartKeys>> =_cartList
+    private val _itemResponseLogin = MutableLiveData<ResultWrapper<ItemResponseLogin>>()
+    val itemResponseLogin: LiveData<ResultWrapper<ItemResponseLogin>> = _itemResponseLogin
 
-    fun insertCart(carts: CartKeys){
+
+    fun login(request: ItemRequestLogin){
         viewModelScope.launch {
-            roomRepository.insertCart(carts)
-        }
-    }
-
-    fun getCartList(){
-         viewModelScope.launch {
-            roomRepository.getCartList().observeForever {
-                _cartList.postValue(it)
-            }
-        }
-    }
-
-    fun updateCart(id: String, quantity: Int, hargaJual: Int){
-        viewModelScope.launch(Dispatchers.IO){
-            roomRepository.updateCart(id, quantity, hargaJual)
-        }
-    }
-
-    val totalHargaJual: LiveData<Int> = roomRepository.getTotalHargaJual()
-
-    fun deleteProductById(id: String){
-        viewModelScope.launch(Dispatchers.IO){
-            roomRepository.deleteProductById(id)
+            repository.login(request)
         }
     }
 }

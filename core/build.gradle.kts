@@ -19,8 +19,7 @@ android {
     flavorDimensions += "env"
     productFlavors {
         create("production") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.5:5000\"")
-            buildConfigField("String", "API_KEY", "\"6f8856ed-9189-488f-9011-0ff4b6c08edc\"")
+            buildConfigField("String", "BASE_URL", "\"https://amerta-bouquet-api.hellokids.my.id/api\"")
         }
     }
 

@@ -13,15 +13,15 @@ import id.application.pointofsales.databinding.FragmentCashierBinding
 import id.application.pointofsales.presentation.adapter.cashier.BouquetAdapter
 import id.application.pointofsales.presentation.adapter.cashier.BouquetItem
 import id.application.pointofsales.presentation.adapter.cashier.ProductAdapter
-import id.application.pointofsales.presentation.viewmodel.VmApplication
+import id.application.pointofsales.presentation.viewmodel.VmRoomApplication
 import id.application.pointofsales.utils.BaseFragment
 import id.application.pointofsales.utils.Utils.formatRupiah
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CashierFragment :
-    BaseFragment<FragmentCashierBinding, VmApplication>(FragmentCashierBinding::inflate) {
+    BaseFragment<FragmentCashierBinding, VmRoomApplication>(FragmentCashierBinding::inflate) {
 
-    override val viewModel: VmApplication by viewModel()
+    override val viewModel: VmRoomApplication by viewModel()
     private lateinit var adapter: BouquetAdapter
     private lateinit var adapterProduct: ProductAdapter
 

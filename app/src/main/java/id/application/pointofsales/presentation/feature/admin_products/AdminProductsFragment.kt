@@ -10,11 +10,11 @@ import id.application.pointofsales.databinding.DialogAdminCreateProductsBinding
 import id.application.pointofsales.databinding.FragmentAdminProductsBinding
 import id.application.pointofsales.presentation.adapter.admin_products.AdminProductsAdapter
 import id.application.pointofsales.presentation.adapter.cashier.BouquetItem
-import id.application.pointofsales.presentation.viewmodel.VmApplication
+import id.application.pointofsales.presentation.viewmodel.VmRoomApplication
 import id.application.pointofsales.utils.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AdminProductsFragment : BaseFragment<FragmentAdminProductsBinding, VmApplication>(
+class AdminProductsFragment : BaseFragment<FragmentAdminProductsBinding, VmRoomApplication>(
     FragmentAdminProductsBinding::inflate) {
 
     private val allProducts = listOf(
@@ -85,7 +85,7 @@ class AdminProductsFragment : BaseFragment<FragmentAdminProductsBinding, VmAppli
     )
     private lateinit var adapter: AdminProductsAdapter
 
-    override val viewModel: VmApplication by viewModel()
+    override val viewModel: VmRoomApplication by viewModel()
 
     override fun initView() {
         setUpRv()

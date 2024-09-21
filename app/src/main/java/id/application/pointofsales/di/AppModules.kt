@@ -18,6 +18,7 @@ import id.application.core.domain.repository.ApplicationRoomRepositoryImpl
 import id.application.core.utils.AssetWrapperApp
 import id.application.core.utils.NetworkChangeReceiver
 import id.application.pointofsales.presentation.viewmodel.VmApplication
+import id.application.pointofsales.presentation.viewmodel.VmRoomApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
@@ -25,12 +26,30 @@ import org.koin.dsl.module
 
 object AppModules {
 
-    private val viewModelModule = module {
-        viewModelOf(::VmApplication)
+    private val networkModule = module {
+        single { ChuckerInterceptor(androidContext()) }
+        single { AuthInterceptor(get(), get()) }
+        single { ApplicationService.invoke(get(), get()) }
     }
 
-    private val utilsModule = module {
-        single { AssetWrapperApp(androidContext()) }
+    private val viewModelModule = module {
+        viewModelOf(::VmApplication)
+        viewModelOf(::VmRoomApplication)
+    }
+
+    private val dataSourceModule = module {
+        single<AppPreferenceDataSource> { AppPreferenceDataSourceImpl(get()) }
+        single<ApplicationDataSource> { ApplicationDataSourceImpl(get()) }
+    }
+
+    private val repositoryModule = module {
+        single<ApplicationRepository> {
+            ApplicationRepositoryImpl(
+                get(),
+                get(),
+            )
+        }
+        single<ApplicationRoomRepository> { ApplicationRoomRepositoryImpl(get()) }
     }
 
     private val localModule = module {
@@ -38,28 +57,10 @@ object AppModules {
         single { ApplicationDatabase.getInstance(get()) }
         single<PreferenceDataStoreHelper> { PreferenceDataStoreHelperImpl(get()) }
         single { get<ApplicationDatabase>().cartDao() }
-
     }
 
-    private val networkModule = module {
-        single { ChuckerInterceptor(androidContext()) }
-        single { AuthInterceptor(get(), get()) }
-        single { ApplicationService.invoke(get(), get()) }
-    }
-
-    private val dataSourceModule = module {
-        single<AppPreferenceDataSource> { AppPreferenceDataSourceImpl(get()) }
-        single<ApplicationDataSource> { ApplicationDataSourceImpl() }
-    }
-
-    private val repositoryModule = module {
-        single<ApplicationRepository> {
-            ApplicationRepositoryImpl()
-        }
-        single<ApplicationRoomRepository> { ApplicationRoomRepositoryImpl(get()) }
-    }
-
-    private val pagingSource = module {
+    private val utilsModule = module {
+        single { AssetWrapperApp(androidContext()) }
     }
 
     private val receiverModule = module {
@@ -74,7 +75,6 @@ object AppModules {
         dataSourceModule,
         repositoryModule,
         utilsModule,
-        pagingSource,
         receiverModule,
     )
 }
