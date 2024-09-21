@@ -12,7 +12,6 @@ import androidx.paging.liveData
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
-import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.basic.ItemResponseBasic
@@ -22,7 +21,6 @@ import id.application.core.domain.repository.ApplicationRepository
 import id.application.core.utils.ResultWrapper
 import id.application.pointofsales.presentation.adapter.admin_users.AdminUserPagingAdapter
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class VmApplication(

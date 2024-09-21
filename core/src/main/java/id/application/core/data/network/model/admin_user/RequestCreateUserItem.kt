@@ -1,8 +1,8 @@
 package id.application.core.data.network.model.admin_user
 
 
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class RequestCreateUserItem(

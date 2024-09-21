@@ -8,8 +8,6 @@ import id.application.core.data.network.model.basic.ResponseBasicItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.data.network.service.ApplicationService
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 interface ApplicationDataSource {
 
