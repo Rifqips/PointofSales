@@ -2,14 +2,18 @@ package id.application.core.domain.repository
 
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.datasource.ApplicationDataSource
+import id.application.core.data.network.model.admin_user.RequestCreateUserItem
 import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
+import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.auth.toItemResponseLogin
 import id.application.core.data.network.model.auth.toRequestLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
-import id.application.core.data.network.model.profile.ResponseProfileItem
-import id.application.core.domain.model.admin_all_user.ItemResponseAllUsers
-import id.application.core.domain.model.admin_all_user.toItemResponseAllUsers
+import id.application.core.data.network.model.profile.UserProfileItem
+import id.application.core.domain.model.admin_user.ItemRequestCreateUser
+import id.application.core.domain.model.admin_user.ItemResponseAllUsers
+import id.application.core.domain.model.admin_user.toItemResponseAllUsers
+import id.application.core.domain.model.admin_user.toRequestCreateUser
 import id.application.core.domain.model.basic.ItemResponseBasic
 import id.application.core.domain.model.basic.toItemResponseBasic
 import id.application.core.domain.model.profile.ItemResponseProfile
@@ -36,6 +40,10 @@ interface ApplicationRepository {
     suspend fun deleteUserById(
         id: String? = null,
     ):  Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
+
+    suspend fun createUser(
+        request: ItemRequestCreateUser,
+    ): Flow<ResultWrapper<ItemResponseBasic<UserProfileItem>>>
 
 }
 
@@ -89,6 +97,21 @@ class ApplicationRepositoryImpl(
                 success = response.success,
                 message = response.message,
                 data = response.data?.toResponseProfileItem()
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun createUser(request: ItemRequestCreateUser): Flow<ResultWrapper<ItemResponseBasic<UserProfileItem>>> {
+        return proceedFlow {
+            val response = source.createUser(request.toRequestCreateUser()).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data
             )
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))

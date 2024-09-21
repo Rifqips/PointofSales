@@ -1,4 +1,4 @@
-package id.application.core.data.network.model.admin_all_user
+package id.application.core.data.network.model.admin_user
 
 
 import androidx.annotation.Keep

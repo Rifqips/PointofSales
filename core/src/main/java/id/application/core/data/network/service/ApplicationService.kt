@@ -3,11 +3,13 @@ package id.application.core.data.network.service
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import id.application.core.BuildConfig
 import id.application.core.data.network.interceptor.AuthInterceptor
-import id.application.core.data.network.model.admin_all_user.ResponseAllUsersItem
+import id.application.core.data.network.model.admin_user.RequestCreateUserItem
+import id.application.core.data.network.model.admin_user.ResponseAllUsersItem
 import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
+import id.application.core.data.network.model.profile.UserProfileItem
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +35,11 @@ interface ApplicationService {
     suspend fun getAllUsers(
         @Query("page") pageItem: Int? = null,
     ): ResponseAllUsersItem
+
+    @POST("admin/users")
+    suspend fun createUser(
+        @Body request: RequestCreateUserItem,
+    ): ResponseBasicItem<UserProfileItem>
 
     @DELETE("admin/users/{id}")
     suspend fun deleteUserById(

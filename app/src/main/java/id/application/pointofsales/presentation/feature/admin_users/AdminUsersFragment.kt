@@ -6,7 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
-import id.application.core.domain.model.admin_all_user.ItemAllUsers
+import id.application.core.domain.model.admin_user.ItemAllUsers
+import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.utils.proceedWhen
 import id.application.pointofsales.databinding.DialogAdminCreateUserBinding
 import id.application.pointofsales.databinding.DialogAdminDetailUserBinding
@@ -39,17 +40,14 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
 
     private fun observeVm() {
         with(viewModel) {
-            // Observe paging data
             userList.observe(viewLifecycleOwner) { pagingData ->
                 adapterUsers.submitData(lifecycle, pagingData)
             }
 
-            // Observe loading state
             loadingPagingResults.observe(viewLifecycleOwner) { loading ->
                 binding.pbUsers.isGone = !loading
             }
 
-            // Observe profile response
             itemResponseProfile.observe(viewLifecycleOwner) {
                 it.proceedWhen(
                     doOnLoading = {
@@ -60,17 +58,36 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
                         response.message?.let { message ->
                             Utils.showToast(message, requireContext())
                         }
-
-                        // Tutup dialog jika sukses
                         activeDialog?.dismiss()
                         activeDialog = null
 
-                        // Reload Paging Data secara eksplisit
                         viewModel.loadPagingUsers(adapterUsers)
                     },
                     doOnError = {
                         binding.pbUsers.isGone = true
-                        Utils.showToast("Error occurred", requireContext())
+                        Utils.showToastFailed("Error occurred", requireContext())
+                    }
+                )
+            }
+
+            itemResponseCreateUser.observe(viewLifecycleOwner) {
+                it.proceedWhen(
+                    doOnLoading = {
+                        binding.pbUsers.isGone = false
+                    },
+                    doOnSuccess = { response ->
+                        binding.pbUsers.isGone = true
+                        response.message?.let { message ->
+                            Utils.showToast(message, requireContext())
+                        }
+                        activeDialog?.dismiss()
+                        activeDialog = null
+
+                        viewModel.loadPagingUsers(adapterUsers)
+                    },
+                    doOnError = {
+                        binding.pbUsers.isGone = true
+                        Utils.showToastFailed("Error occurred", requireContext())
                     }
                 )
             }
@@ -106,11 +123,24 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
         }.show()
         activeDialog = dialog
 
-        with(binding) {
+        with(binding) {with(binding) {
+
+            btnSubmit.setOnClickListener {
+                val createUser = ItemRequestCreateUser(
+                    fullname = etFullnameEdit.text.toString(),
+                    username = etUsernameEdit.text.toString(),
+                    email = etEmailEdit.text.toString(),
+                    phoneNumber = etPhoneNumberEdit.text.toString(),
+                    role = etUserRoleEdit.text.toString()
+                )
+                viewModel.createUser(createUser)
+            }
+
             ivClose.setOnClickListener {
                 dialog.dismiss()
                 activeDialog = null
             }
+        }
         }
         binding.root.setOnTouchListener { _, _ -> true }
     }

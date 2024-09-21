@@ -12,6 +12,9 @@ import androidx.paging.liveData
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
+import id.application.core.data.network.model.auth.RequestLoginItem
+import id.application.core.data.network.model.profile.UserProfileItem
+import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.basic.ItemResponseBasic
 import id.application.core.domain.model.profile.ItemResponseProfile
 import id.application.core.domain.paging.UsersPagingSource
@@ -35,6 +38,10 @@ class VmApplication(
 
     private val _itemResponseProfile = MutableLiveData<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>()
     val itemResponseProfile: LiveData<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>> = _itemResponseProfile
+
+    private val _itemResponseCreateUser = MutableLiveData<ResultWrapper<ItemResponseBasic<UserProfileItem>>>()
+    val itemResponseCreateUser: LiveData<ResultWrapper<ItemResponseBasic<UserProfileItem>>> = _itemResponseCreateUser
+
 
     private val _loadingPagingResults = MutableLiveData<Boolean>()
     val loadingPagingResults: LiveData<Boolean> = _loadingPagingResults
@@ -63,6 +70,14 @@ class VmApplication(
         viewModelScope.launch {
             repository.profile().collect{
                 _itemResponseProfile.postValue(it)
+            }
+        }
+    }
+
+    fun createUser(request: ItemRequestCreateUser) {
+        viewModelScope.launch {
+            repository.createUser(request).collect{
+                _itemResponseCreateUser.postValue(it)
             }
         }
     }

@@ -2,7 +2,7 @@ package id.application.core.domain.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import id.application.core.domain.model.admin_all_user.ItemAllUsers
+import id.application.core.domain.model.admin_user.ItemAllUsers
 import id.application.core.domain.repository.ApplicationRepository
 
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import id.application.core.domain.model.admin_all_user.ItemAllUsers
+import id.application.core.domain.model.admin_user.ItemAllUsers
 import id.application.pointofsales.databinding.ItemAdminUsersBinding
 
 class AdminUserPagingAdapter(

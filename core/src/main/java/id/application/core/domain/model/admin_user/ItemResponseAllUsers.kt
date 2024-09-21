@@ -1,9 +1,9 @@
-package id.application.core.domain.model.admin_all_user
+package id.application.core.domain.model.admin_user
 
 
-import id.application.core.data.network.model.admin_all_user.AllUsersItem
-import id.application.core.data.network.model.admin_all_user.DataUsers
-import id.application.core.data.network.model.admin_all_user.ResponseAllUsersItem
+import id.application.core.data.network.model.admin_user.AllUsersItem
+import id.application.core.data.network.model.admin_user.DataUsers
+import id.application.core.data.network.model.admin_user.ResponseAllUsersItem
 
 data class ItemResponseAllUsers(
     val `data`: UsersData?,
