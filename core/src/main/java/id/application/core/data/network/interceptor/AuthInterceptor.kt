@@ -1,7 +1,9 @@
 package id.application.core.data.network.interceptor
 
 import android.content.Context
+import id.application.core.BuildConfig
 import id.application.core.data.datasource.AppPreferenceDataSource
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -16,12 +18,10 @@ class AuthInterceptor(
         val requestBuilder = originalRequest.newBuilder()
         requestBuilder.addHeader("accept", "application/json")
         requestBuilder.addHeader("Content-Type", "application/json")
-
-//        val token = runBlocking { preference.getUserToken() } // Use runBlocking to wait for the token
-//        if (!token.isNullOrEmpty()) {
-//            requestBuilder.addHeader("Authorization", "Bearer $token")
-//        }
-
+        val token = runBlocking { preference.getUserToken() }
+        if (token.isNotEmpty()) {
+            requestBuilder.addHeader("Bearer", token)
+        }
         val modifiedRequest = requestBuilder.build()
         val response = chain.proceed(modifiedRequest)
 
