@@ -14,11 +14,3 @@ fun <T> ResponseBasicItem<T>.toItemResponseBasic(): ItemResponseBasic<T> {
         data = this.data
     )
 }
-
-fun <T> ItemResponseBasic<T>.toResponseBasicItem(): ResponseBasicItem<T> {
-    return ResponseBasicItem(
-        success = this.success,
-        message = this.message,
-        data = this.data
-    )
-}

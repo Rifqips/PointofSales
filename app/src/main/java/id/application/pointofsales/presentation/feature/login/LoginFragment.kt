@@ -31,7 +31,6 @@ class LoginFragment :
     }
 
     private fun observeVm(){
-        viewModel.login(itemLogin)
         viewModel.itemResponseLogin.observe(viewLifecycleOwner){
             it.proceedWhen(
                 doOnSuccess = {
@@ -46,11 +45,13 @@ class LoginFragment :
         }
     }
 
-    private fun doLogin(){
-         itemLogin = ItemRequestLogin(
-            binding.etEmailEditLogin.text.toString(),
-            binding.etPasswordEditLogin.toString()
+    private fun doLogin() {
+        itemLogin = ItemRequestLogin(
+            username = binding.etEmailEditLogin.text.toString(),
+            password = binding.etPasswordEditLogin.text.toString()
         )
+        viewModel.login(itemLogin)
     }
+
 
 }

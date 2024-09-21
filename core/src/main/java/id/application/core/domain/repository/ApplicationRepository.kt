@@ -6,6 +6,7 @@ import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
 import id.application.core.data.network.model.auth.toItemResponseLogin
 import id.application.core.data.network.model.auth.toRequestLoginItem
+import id.application.core.data.network.model.basic.ItemResponseBasic
 import id.application.core.data.network.model.basic.toItemResponseBasic
 import id.application.core.utils.ResultWrapper
 import id.application.core.utils.proceedFlow
@@ -17,7 +18,7 @@ interface ApplicationRepository {
 
     suspend fun login(
         request: ItemRequestLogin
-    ): Flow<ResultWrapper<ItemResponseLogin?>>
+    ): Flow<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>>
 }
 
 class ApplicationRepositoryImpl(
@@ -25,15 +26,20 @@ class ApplicationRepositoryImpl(
     private val pref: AppPreferenceDataSource
 ): ApplicationRepository {
 
-    override suspend fun login(request: ItemRequestLogin): Flow<ResultWrapper<ItemResponseLogin?>> {
+    override suspend fun login(request: ItemRequestLogin): Flow<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>> {
         return proceedFlow {
-            source.login(request.toRequestLoginItem()).toItemResponseBasic().let {  basicResponse ->
-                basicResponse.data?.toItemResponseLogin()
-            }
+            val response = source.login(request.toRequestLoginItem()).toItemResponseBasic()
+            val mappedData = response.data?.toItemResponseLogin()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = mappedData
+            )
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
             emit(ResultWrapper.Loading())
         }
     }
+
 }

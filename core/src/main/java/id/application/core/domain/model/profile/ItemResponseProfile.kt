@@ -28,10 +28,3 @@ fun ItemUserProfile.toUserProfileItem(): UserProfileItem {
     )
 }
 
-
-fun ItemResponseProfile.toResponseProfileItem(): ResponseProfileItem {
-    return ResponseProfileItem(
-        user = this.user,
-        roles = this.roles
-    )
-}

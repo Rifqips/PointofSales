@@ -6,7 +6,6 @@ data class ItemResponseLogin(
     val expiresIn: Int?
 )
 
-// Mapper function to convert ResponseLoginItem to ItemResponseLogin
 fun ResponseLoginItem.toItemResponseLogin(): ItemResponseLogin {
     return ItemResponseLogin(
         accessToken = this.accessToken,
@@ -15,12 +14,4 @@ fun ResponseLoginItem.toItemResponseLogin(): ItemResponseLogin {
     )
 }
 
-// Mapper function to convert ItemResponseLogin to ResponseLoginItem
-fun ItemResponseLogin.toResponseLoginItem(): ResponseLoginItem {
-    return ResponseLoginItem(
-        accessToken = this.accessToken,
-        tokenType = this.tokenType,
-        expiresIn = this.expiresIn
-    )
-}
 
