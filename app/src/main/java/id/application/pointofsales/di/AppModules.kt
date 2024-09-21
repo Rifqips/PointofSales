@@ -28,7 +28,7 @@ object AppModules {
 
     private val networkModule = module {
         single { ChuckerInterceptor(androidContext()) }
-        single { AuthInterceptor(get(), get()) }
+        single { AuthInterceptor(androidContext(), get()) }
         single { ApplicationService.invoke(get(), get()) }
     }
 
@@ -49,7 +49,11 @@ object AppModules {
                 get(),
             )
         }
-        single<ApplicationRoomRepository> { ApplicationRoomRepositoryImpl(get()) }
+        single<ApplicationRoomRepository> {
+            ApplicationRoomRepositoryImpl(
+                get()
+            )
+        }
     }
 
     private val localModule = module {
@@ -63,9 +67,6 @@ object AppModules {
         single { AssetWrapperApp(androidContext()) }
     }
 
-    private val receiverModule = module {
-        factory { (onNetworkAvailable: () -> Unit) -> NetworkChangeReceiver(onNetworkAvailable) }
-    }
 
     val modules: List<Module> = listOf(
         viewModelModule,
@@ -75,6 +76,5 @@ object AppModules {
         dataSourceModule,
         repositoryModule,
         utilsModule,
-        receiverModule,
     )
 }

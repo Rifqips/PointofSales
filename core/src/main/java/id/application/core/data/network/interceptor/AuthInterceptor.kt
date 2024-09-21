@@ -20,7 +20,7 @@ class AuthInterceptor(
         requestBuilder.addHeader("Content-Type", "application/json")
         val token = runBlocking { preference.getUserToken() }
         if (token.isNotEmpty()) {
-            requestBuilder.addHeader("Bearer", token)
+            requestBuilder.addHeader("Authorization", "Bearer $token")
         }
         val modifiedRequest = requestBuilder.build()
         val response = chain.proceed(modifiedRequest)

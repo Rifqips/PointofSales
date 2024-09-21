@@ -19,7 +19,7 @@ android {
     flavorDimensions += "env"
     productFlavors {
         create("production") {
-            buildConfigField("String", "BASE_URL", "\"https://amerta-bouquet-api.hellokids.my.id/api\"")
+            buildConfigField("String", "BASE_URL", "\"https://amerta-bouquet-api.hellokids.my.id/api/\"")
         }
     }
 
@@ -69,9 +69,9 @@ dependencies {
     api(libs.gson)
     api(libs.androidx.paging.common.ktx)
     api(libs.androidx.paging.runtime.ktx)
-    api("androidx.room:room-runtime:2.6.1")
-    api("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    api(libs.androidx.room.runtime)
+    api(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }
