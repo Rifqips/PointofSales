@@ -6,6 +6,8 @@ import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
 import id.application.core.data.network.model.auth.toItemResponseLogin
 import id.application.core.data.network.model.auth.toRequestLoginItem
+import id.application.core.data.network.model.basic.ResponseBasicItem
+import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.domain.model.admin_all_user.ItemResponseAllUsers
 import id.application.core.domain.model.admin_all_user.toItemResponseAllUsers
 import id.application.core.domain.model.basic.ItemResponseBasic
@@ -26,10 +28,14 @@ interface ApplicationRepository {
 
     suspend fun profile(): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
 
-
     suspend fun getAllUsers(
         pageItem: Int? = null,
     ): ItemResponseAllUsers
+
+
+    suspend fun deleteUserById(
+        id: String? = null,
+    ):  Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
 
 }
 
@@ -74,5 +80,20 @@ class ApplicationRepositoryImpl(
         pageItem: Int?,
     ): ItemResponseAllUsers {
         return source.getAllUsers(pageItem).toItemResponseAllUsers()
+    }
+
+    override suspend fun deleteUserById(id: String?): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>> {
+        return proceedFlow {
+            val response = source.deleteUserById(id).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data?.toResponseProfileItem()
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
     }
 }

@@ -74,12 +74,12 @@
 
         <TextView
             android:id="@+id/tv_email_account"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/text_color"
             tools:text="Padi@gmail.com"
-            android:maxLength="10"
+            android:maxLength="20"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintStart_toStartOf="@+id/tv_nickname"

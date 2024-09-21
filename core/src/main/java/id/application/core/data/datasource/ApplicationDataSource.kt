@@ -6,6 +6,8 @@ import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.service.ApplicationService
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApplicationDataSource {
 
@@ -19,6 +21,9 @@ interface ApplicationDataSource {
         pageItem: Int? = null,
     ): ResponseAllUsersItem
 
+    suspend fun deleteUserById(
+        id: String? = null,
+    ): ResponseBasicItem<ResponseProfileItem>
 }
 
 class ApplicationDataSourceImpl(
@@ -37,6 +42,10 @@ class ApplicationDataSourceImpl(
         pageItem: Int?,
     ): ResponseAllUsersItem {
         return service.getAllUsers(pageItem)
+    }
+
+    override suspend fun deleteUserById(id: String?): ResponseBasicItem<ResponseProfileItem> {
+        return service.deleteUserById(id)
     }
 
 

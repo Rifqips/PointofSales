@@ -19,6 +19,7 @@ import id.application.core.domain.repository.ApplicationRepository
 import id.application.core.utils.ResultWrapper
 import id.application.pointofsales.presentation.adapter.admin_users.AdminUserPagingAdapter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class VmApplication(
@@ -65,6 +66,15 @@ class VmApplication(
             }
         }
     }
+
+    fun deleteUserById(id: String? = null, ){
+        viewModelScope.launch {
+            repository.deleteUserById(id).collect{
+                _itemResponseProfile.postValue(it)
+            }
+        }
+    }
+
 
     fun loadPagingUsers(
         adapter: AdminUserPagingAdapter,

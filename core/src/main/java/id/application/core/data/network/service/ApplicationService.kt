@@ -12,8 +12,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +33,11 @@ interface ApplicationService {
     suspend fun getAllUsers(
         @Query("page") pageItem: Int? = null,
     ): ResponseAllUsersItem
+
+    @DELETE("admin/users/{id}")
+    suspend fun deleteUserById(
+        @Path("id") id: String? = null,
+    ): ResponseBasicItem<ResponseProfileItem>
 
     companion object{
         @JvmStatic
