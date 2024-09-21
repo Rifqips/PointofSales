@@ -1,4 +1,6 @@
-package id.application.core.data.network.model.basic
+package id.application.core.domain.model.basic
+
+import id.application.core.data.network.model.basic.ResponseBasicItem
 
 
 data class ItemResponseBasic<T>(

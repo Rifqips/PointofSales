@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.application.pointofsales.databinding.DialogAdminCreateUserBinding
 import id.application.pointofsales.databinding.FragmentAdminUsersBinding
-import id.application.pointofsales.presentation.adapter.admin_users.User
-import id.application.pointofsales.presentation.adapter.admin_users.UserAdapter
+import id.application.pointofsales.presentation.adapter.admin_users.AdminUserPagingAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
 import id.application.pointofsales.utils.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,34 +18,39 @@ class AdminUsersFragment :
     BaseFragment<FragmentAdminUsersBinding, VmApplication>(FragmentAdminUsersBinding::inflate) {
     override val viewModel: VmApplication by viewModel()
 
-    private lateinit var userAdapter: UserAdapter
+    private var activeDialog: AlertDialog? = null
 
-    private val sampleUsers = listOf(
-        User("Rifqi Padi Siliwangi", "AMERTA.PADI", "085123456780", "Staff - Cashier", "R"),
-        User("Aulia Rahman", "AMERTA.AULIA", "085678123456", "Staff - Admin", "A"),
-        User("Joko Purwanto", "AMERTA.PURWANTO", "085678123456", "Staff - Admin", "J"),
-        User("Tejo Sutejo", "AMERTA.TEJO", "085678123456", "Staff - Admin", "T"),
-        User("Puspitasari F", "AMERTA.PUSPITA", "085678123456", "Staff - Admin", "P"),
-    )
+    private val adapterUsers: AdminUserPagingAdapter by lazy {
+        AdminUserPagingAdapter({})
+    }
+
 
     override fun initView() {
-        setupRecyclerView()
+        observeVm()
+        loadPagingTeam(adapterUsers)
+
     }
 
-    private fun setupRecyclerView() {
-        userAdapter = UserAdapter(sampleUsers) { user ->
-            showUserDetails(user)
-        }
+    private fun loadPagingTeam(adapter: AdminUserPagingAdapter) {
+        viewModel.loadPagingUsers(adapter)
+    }
 
+    private fun observeVm(){
+        with(viewModel){
+            viewModel.userList.observe(viewLifecycleOwner) { pagingData ->
+                adapterUsers.submitData(lifecycle, pagingData)
+            }
+            viewModel.loadingPagingResults.observe(viewLifecycleOwner) { loading ->
+                binding.pbUsers.isGone = !loading
+            }
+        }
         binding.rvListUsers.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = userAdapter
+            adapter = adapterUsers
+
         }
     }
 
-    private fun showUserDetails(user: User) {
-        Toast.makeText(requireContext(), "Clicked on: ${user.name}", Toast.LENGTH_SHORT).show()
-    }
 
     override fun initListener() {
         with(binding) {
@@ -55,7 +60,6 @@ class AdminUsersFragment :
         }
     }
 
-    private var activeDialog: AlertDialog? = null
 
     @SuppressLint("ClickableViewAccessibility")
     private fun showDialogAddUsers() {

@@ -43,7 +43,6 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="R"
                 android:textColor="@color/black"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Rifqi Padi Siliwangi"
         android:textSize="20sp"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
@@ -72,7 +70,6 @@
         android:id="@+id/tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AMERTA.PADI"
         android:textSize="20sp"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
@@ -84,7 +81,6 @@
         android:id="@+id/tv_email_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="085123456780"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/text_color"
         android:textSize="20sp"
@@ -96,7 +92,6 @@
         android:id="@+id/tv_user_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Staff - Cashier"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/text_color"
         android:textSize="20sp"
@@ -105,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue_light_primary"

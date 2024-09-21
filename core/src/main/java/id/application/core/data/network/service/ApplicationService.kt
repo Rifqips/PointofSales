@@ -3,6 +3,7 @@ package id.application.core.data.network.service
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import id.application.core.BuildConfig
 import id.application.core.data.network.interceptor.AuthInterceptor
+import id.application.core.data.network.model.admin_all_user.ResponseAllUsersItem
 import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
@@ -11,7 +12,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface ApplicationService {
@@ -23,6 +26,11 @@ interface ApplicationService {
 
     @POST("auth/profile")
     suspend fun profile(): ResponseBasicItem<ResponseProfileItem>
+
+    @GET("admin/users")
+    suspend fun getAllUsers(
+        @Query("page") pageItem: Int? = null,
+    ): ResponseAllUsersItem
 
     companion object{
         @JvmStatic

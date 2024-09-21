@@ -1,7 +1,10 @@
-package id.application.core.data.network.model.profile
+package id.application.core.domain.model.profile
+
+import id.application.core.data.network.model.profile.ResponseProfileItem
+import id.application.core.data.network.model.profile.UserProfileItem
 
 data class ItemResponseProfile(
-    val user: UserProfileItem?,
+    val user: ItemUserProfile?,
     val roles: List<String>?
 )
 
@@ -16,8 +19,8 @@ data class ItemUserProfile(
     val updatedAt: String?
 )
 
-fun ItemUserProfile.toUserProfileItem(): UserProfileItem {
-    return UserProfileItem(
+fun UserProfileItem.toUserProfileItem(): ItemUserProfile {
+    return ItemUserProfile(
         id = this.id,
         email = this.email,
         username = this.username,
@@ -28,3 +31,10 @@ fun ItemUserProfile.toUserProfileItem(): UserProfileItem {
     )
 }
 
+
+fun ResponseProfileItem.toResponseProfileItem(): ItemResponseProfile {
+    return ItemResponseProfile(
+        user = this.user?.toUserProfileItem(),
+        roles = this.roles
+    )
+}

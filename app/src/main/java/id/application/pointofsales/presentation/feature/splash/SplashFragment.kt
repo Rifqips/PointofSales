@@ -19,8 +19,18 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, VmApplication>(Fragme
     override fun initListener() {
         lifecycleScope.launch {
             delay(3000)
-            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            checkLoginResult()
         }
     }
 
+    private fun checkLoginResult() {
+        viewModel.checkLogin()
+        viewModel.isUserLogin.observe(viewLifecycleOwner) { isLogin ->
+            if (!isLogin) {
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            }else{
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            }
+        }
+    }
 }
