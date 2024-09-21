@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
     android:background="@color/white"
@@ -18,9 +19,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/iv_account"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:cardCornerRadius="40dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="80dp"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Rifqi Padi Siliwangi"
+            tools:text="Rifqi Padi Siliwangi"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/iv_account"
@@ -66,9 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
-            android:text="AMERTA.PADI"
+            tools:text="AMERTA.PADI"
             android:textColor="@color/black"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/tv_name_account"
             app:layout_constraintTop_toBottomOf="@id/tv_name_account" />
 
@@ -77,8 +77,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="085123456780"
             android:textColor="@color/text_color"
+            tools:text="Padi@gmail.com"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintStart_toStartOf="@+id/tv_nickname"
             app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
 
@@ -87,10 +90,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Staff - Cashier"
+            tools:text="Staff - Cashier"
             android:textColor="@color/text_color"
             app:layout_constraintStart_toStartOf="@+id/tv_email_account"
             app:layout_constraintTop_toBottomOf="@id/tv_email_account" />
+
+        <TextView
+            android:id="@+id/tv_user_phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/text_color"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_user_role"
+            app:layout_constraintTop_toBottomOf="@+id/iv_account"
+            tools:text="085155055472" />
 
         <TextView
             android:id="@+id/tv_detail"
@@ -101,7 +115,8 @@
             android:textColor="@color/blue_light_primary"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_email_account" />
+            app:layout_constraintTop_toTopOf="@id/tv_user_role"
+            app:layout_constraintBottom_toBottomOf="@id/tv_user_role" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

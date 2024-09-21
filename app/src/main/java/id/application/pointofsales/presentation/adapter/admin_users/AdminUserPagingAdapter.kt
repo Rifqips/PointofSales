@@ -47,13 +47,16 @@ class AdminUserPagingAdapter(
 
         @SuppressLint("SetTextI18n", "NewApi")
         fun bind(user: ItemAllUsers) {
-            binding.tvNameAccount.text = user.fullname
-            binding.tvNickname.text = user.username
-            binding.tvEmailAccount.text = user.phoneNumber
-            binding.tvUserRole.text = user.email
-
-            binding.tvDetail.setOnClickListener {
-                onClickListener(user)
+            with(binding){
+                tvUserIcon.text = user.fullname?.get(0).toString()
+                tvNameAccount.text = user.fullname
+                tvNickname.text = user.username
+                tvEmailAccount.text = user.email
+                tvUserPhonenumber.text = user.phoneNumber
+                tvUserRole.text = user.roles?.first()
+                tvDetail.setOnClickListener {
+                    onClickListener(user)
+                }
             }
         }
     }

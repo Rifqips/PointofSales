@@ -6,8 +6,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import id.application.core.domain.model.admin_all_user.ItemAllUsers
 import id.application.pointofsales.databinding.DialogAdminCreateUserBinding
+import id.application.pointofsales.databinding.DialogAdminDetailUserBinding
 import id.application.pointofsales.databinding.FragmentAdminUsersBinding
 import id.application.pointofsales.presentation.adapter.admin_users.AdminUserPagingAdapter
 import id.application.pointofsales.presentation.viewmodel.VmApplication
@@ -21,7 +22,9 @@ class AdminUsersFragment :
     private var activeDialog: AlertDialog? = null
 
     private val adapterUsers: AdminUserPagingAdapter by lazy {
-        AdminUserPagingAdapter({})
+        AdminUserPagingAdapter({
+            showDialogDetailUser(it)
+        })
     }
 
 
@@ -86,4 +89,39 @@ class AdminUsersFragment :
             true
         }
     }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun showDialogDetailUser(item : ItemAllUsers) {
+        activeDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
+        }
+        val binding: DialogAdminDetailUserBinding = DialogAdminDetailUserBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(requireContext(), 0).create()
+        dialog.apply {
+            setView(binding.root)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCanceledOnTouchOutside(false)
+        }.show()
+        activeDialog = dialog
+        with(binding) {
+            tvUserIcon.text = item.fullname?.get(0).toString()
+            etFullnameEdit.setText(item.fullname)
+            etUsernameEdit.setText(item.username)
+            etEmailEdit.setText(item.email)
+            etPhoneNumberEdit.setText(item.phoneNumber)
+            etUserRoleEdit.setText(item.roles?.first())
+            ivClose.setOnClickListener {
+                dialog.dismiss()
+                activeDialog = null
+            }
+        }
+        binding.root.setOnTouchListener { _, _ ->
+            true
+        }
+    }
+
+
 }
