@@ -18,7 +18,8 @@ import id.application.pointofsales.utils.BaseFragment
 import id.application.pointofsales.utils.Utils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication>(FragmentAdminUsersBinding::inflate) {
+class AdminUsersFragment :
+    BaseFragment<FragmentAdminUsersBinding, VmApplication>(FragmentAdminUsersBinding::inflate) {
     override val viewModel: VmApplication by viewModel()
 
     private var activeDialog: AlertDialog? = null
@@ -44,10 +45,6 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
                 adapterUsers.submitData(lifecycle, pagingData)
             }
 
-            loadingPagingResults.observe(viewLifecycleOwner) { loading ->
-                binding.pbUsers.isGone = !loading
-            }
-
             itemResponseProfile.observe(viewLifecycleOwner) {
                 it.proceedWhen(
                     doOnLoading = {
@@ -55,17 +52,10 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
                     },
                     doOnSuccess = { response ->
                         binding.pbUsers.isGone = true
-                        response.message?.let { message ->
-                            Utils.showToast(message, requireContext())
-                        }
-                        activeDialog?.dismiss()
-                        activeDialog = null
-
-                        viewModel.loadPagingUsers(adapterUsers)
+                        adapterUsers.refresh()
                     },
                     doOnError = {
                         binding.pbUsers.isGone = true
-                        Utils.showToastFailed("Error occurred", requireContext())
                     }
                 )
             }
@@ -134,6 +124,8 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
                     role = etUserRoleEdit.text.toString()
                 )
                 viewModel.createUser(createUser)
+                dialog.dismiss()
+                activeDialog = null
             }
 
             ivClose.setOnClickListener {
@@ -172,6 +164,8 @@ class AdminUsersFragment : BaseFragment<FragmentAdminUsersBinding, VmApplication
 
             btnDelete.setOnClickListener {
                 viewModel.deleteUserById(item.id)
+                dialog.dismiss()
+                activeDialog = null
             }
 
             ivClose.setOnClickListener {
