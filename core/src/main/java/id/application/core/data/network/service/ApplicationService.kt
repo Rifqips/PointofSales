@@ -17,6 +17,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
@@ -40,6 +41,12 @@ interface ApplicationService {
     suspend fun createUser(
         @Body request: RequestCreateUserItem,
     ): ResponseBasicItem<UserProfileItem>
+
+    @PUT("admin/users/{id}")
+    suspend fun updateUser(
+        @Path("id") id: String,
+        @Body request: RequestCreateUserItem,
+    ): ResponseBasicItem<ResponseProfileItem>
 
     @DELETE("admin/users/{id}")
     suspend fun deleteUserById(

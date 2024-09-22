@@ -2,10 +2,13 @@ package id.application.core.domain.repository
 
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.datasource.ApplicationDataSource
+import id.application.core.data.network.model.admin_user.RequestCreateUserItem
 import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
 import id.application.core.data.network.model.auth.toItemResponseLogin
 import id.application.core.data.network.model.auth.toRequestLoginItem
+import id.application.core.data.network.model.basic.ResponseBasicItem
+import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.admin_user.ItemResponseAllUsers
@@ -41,6 +44,11 @@ interface ApplicationRepository {
     suspend fun createUser(
         request: ItemRequestCreateUser,
     ): Flow<ResultWrapper<ItemResponseBasic<UserProfileItem>>>
+
+    suspend fun updateUser(
+        id: String,
+        request: ItemRequestCreateUser,
+    ): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
 
 }
 
@@ -109,6 +117,21 @@ class ApplicationRepositoryImpl(
                 success = response.success,
                 message = response.message,
                 data = response.data
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun updateUser(id: String, request: ItemRequestCreateUser): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>> {
+        return proceedFlow {
+            val response = source.updateUser(id, request.toRequestCreateUser()).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data?.toResponseProfileItem()
             )
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))

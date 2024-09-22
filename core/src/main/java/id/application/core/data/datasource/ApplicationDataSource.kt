@@ -8,6 +8,8 @@ import id.application.core.data.network.model.basic.ResponseBasicItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.data.network.service.ApplicationService
+import retrofit2.http.Body
+import retrofit2.http.PUT
 
 interface ApplicationDataSource {
 
@@ -28,6 +30,11 @@ interface ApplicationDataSource {
     suspend fun createUser(
         request: RequestCreateUserItem,
     ): ResponseBasicItem<UserProfileItem>
+
+    suspend fun updateUser(
+        id: String,
+        request: RequestCreateUserItem,
+    ): ResponseBasicItem<ResponseProfileItem>
 }
 
 class ApplicationDataSourceImpl(
@@ -56,5 +63,7 @@ class ApplicationDataSourceImpl(
         return service.createUser(request)
     }
 
-
+    override suspend fun updateUser(id: String ,request: RequestCreateUserItem): ResponseBasicItem<ResponseProfileItem> {
+        return service.updateUser(id, request)
+    }
 }

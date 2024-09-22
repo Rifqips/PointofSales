@@ -114,7 +114,6 @@ class AdminUsersFragment :
         activeDialog = dialog
 
         with(binding) {with(binding) {
-
             btnSubmit.setOnClickListener {
                 val createUser = ItemRequestCreateUser(
                     fullname = etFullnameEdit.text.toString(),
@@ -164,6 +163,19 @@ class AdminUsersFragment :
 
             btnDelete.setOnClickListener {
                 viewModel.deleteUserById(item.id)
+                dialog.dismiss()
+                activeDialog = null
+            }
+
+            btnUpdate.setOnClickListener {
+                val update = ItemRequestCreateUser(
+                    fullname = etFullnameEdit.text.toString(),
+                    username = etUsernameEdit.text.toString(),
+                    email = etEmailEdit.text.toString(),
+                    phoneNumber = etPhoneNumberEdit.text.toString(),
+                    role = etUserRoleEdit.text.toString()
+                )
+                item.id?.let { it1 -> viewModel.updateUser(it1, update) }
                 dialog.dismiss()
                 activeDialog = null
             }

@@ -21,6 +21,7 @@ import id.application.core.domain.repository.ApplicationRepository
 import id.application.core.utils.ResultWrapper
 import id.application.pointofsales.presentation.adapter.admin_users.AdminUserPagingAdapter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class VmApplication(
@@ -76,6 +77,14 @@ class VmApplication(
         viewModelScope.launch {
             repository.createUser(request).collect{
                 _itemResponseCreateUser.postValue(it)
+            }
+        }
+    }
+
+    fun updateUser(id: String, request: ItemRequestCreateUser){
+        viewModelScope.launch {
+            repository.updateUser(id, request).collect{
+                _itemResponseProfile.postValue(it)
             }
         }
     }
