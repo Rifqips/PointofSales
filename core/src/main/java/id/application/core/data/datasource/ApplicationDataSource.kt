@@ -9,6 +9,9 @@ import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
 import id.application.core.data.network.model.products.ResponseAllProductsItem
+import id.application.core.data.network.model.products.category.RequestProductsCategory
+import id.application.core.data.network.model.products.category.ResponseAllProductCategory
+import id.application.core.data.network.model.products.category.ResponseProductCategory
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.data.network.service.ApplicationService
@@ -38,6 +41,7 @@ interface ApplicationDataSource {
     ): ResponseBasicItem<DataCreateProducts>
 
     suspend fun updateProducts(
+        id : String? = null,
         request: RequestCreateProductsItem,
     ): ResponseBasicItem<DataCreateProducts>
 
@@ -54,6 +58,29 @@ interface ApplicationDataSource {
     suspend fun deleteProduct(
         id: String? = null,
     ): ResponseBasicItem<ItemAllProducts>
+
+    suspend fun createProductCategory(
+       request: RequestProductsCategory,
+    ): ResponseBasicItem<ResponseProductCategory>
+
+    suspend fun getAllProductCategories(
+        pageItem: Int? = null,
+        limit: Int? = null,
+        search: String? = null,
+    ): ResponseAllProductCategory
+
+    suspend fun getProductCategoryById(
+        id: String? = null,
+    ):  ResponseBasicItem<ResponseProductCategory>
+
+    suspend fun updateProductCategory(
+        id: String? = null,
+        request: RequestProductsCategory,
+    ): ResponseBasicItem<ResponseProductCategory>
+
+    suspend fun deleteProductCategory(
+        id: String? = null,
+    ): ResponseBasicItem<ResponseProductCategory>
 }
 
 class ApplicationDataSourceImpl(
@@ -86,8 +113,8 @@ class ApplicationDataSourceImpl(
         return service.createProducts(request)
     }
 
-    override suspend fun updateProducts(request: RequestCreateProductsItem): ResponseBasicItem<DataCreateProducts> {
-        return service.updateProducts(request)
+    override suspend fun updateProducts(id: String?, request: RequestCreateProductsItem): ResponseBasicItem<DataCreateProducts> {
+        return service.updateProducts(id, request)
     }
 
     override suspend fun getAllProducts(
@@ -106,5 +133,30 @@ class ApplicationDataSourceImpl(
         return service.deleteProductById(id)
     }
 
+    override suspend fun createProductCategory(request: RequestProductsCategory): ResponseBasicItem<ResponseProductCategory> {
+        return service.createProductCategory(request)
+    }
 
+    override suspend fun getAllProductCategories(
+        pageItem: Int?,
+        limit: Int?,
+        search: String?
+    ): ResponseAllProductCategory {
+        return service.getAllProductCategories(pageItem, limit, search)
+    }
+
+    override suspend fun getProductCategoryById(id: String?): ResponseBasicItem<ResponseProductCategory> {
+        return service.getProductCategoryById(id)
+    }
+
+    override suspend fun updateProductCategory(
+        id: String?,
+        request: RequestProductsCategory
+    ): ResponseBasicItem<ResponseProductCategory> {
+        return service.updateProductCategory(id, request)
+    }
+
+    override suspend fun deleteProductCategory(id: String?): ResponseBasicItem<ResponseProductCategory> {
+        return service.deleteProductCategory(id)
+    }
 }

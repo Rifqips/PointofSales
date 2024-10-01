@@ -10,6 +10,9 @@ import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
 import id.application.core.data.network.model.products.ResponseAllProductsItem
+import id.application.core.data.network.model.products.category.RequestProductsCategory
+import id.application.core.data.network.model.products.category.ResponseAllProductCategory
+import id.application.core.data.network.model.products.category.ResponseProductCategory
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.admin_user.ItemResponseAllUsers
@@ -39,7 +42,7 @@ interface ApplicationRepository {
 
     suspend fun deleteUserById(
         id: String? = null,
-    ):  Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
+    ): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
 
     suspend fun createUser(
         request: ItemRequestCreateUser,
@@ -50,6 +53,7 @@ interface ApplicationRepository {
     ): Flow<ResultWrapper<ItemResponseBasic<DataCreateProducts>>>
 
     suspend fun updateProducts(
+        id: String? = null,
         request: RequestCreateProductsItem,
     ): Flow<ResultWrapper<ItemResponseBasic<DataCreateProducts>>>
 
@@ -62,16 +66,40 @@ interface ApplicationRepository {
     suspend fun getProductId(
         id: String? = null,
     ): Flow<ResultWrapper<ItemResponseBasic<ItemAllProducts>>>
+
     suspend fun deleteProduct(
         id: String? = null,
     ): Flow<ResultWrapper<ItemResponseBasic<ItemAllProducts>>>
 
+    suspend fun createProductCategory(
+        request: RequestProductsCategory,
+    ): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>
+
+    suspend fun getAllProductCategories(
+        pageItem: Int? = null,
+        limit: Int? = null,
+        search: String? = null,
+    ): ResponseAllProductCategory
+
+    suspend fun getProductCategoryById(
+        id: String? = null,
+    ):  Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>
+
+    suspend fun updateProductCategory(
+        id: String? = null,
+        request: RequestProductsCategory,
+    ): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>
+
+    suspend fun deleteProductCategory(
+        id: String? = null,
+    ): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>
+
 }
 
 class ApplicationRepositoryImpl(
-    private val source : ApplicationDataSource,
+    private val source: ApplicationDataSource,
     private val pref: AppPreferenceDataSource
-): ApplicationRepository {
+) : ApplicationRepository {
 
     override suspend fun login(request: ItemRequestLogin): Flow<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>> {
         return proceedFlow {
@@ -156,9 +184,12 @@ class ApplicationRepositoryImpl(
         }
     }
 
-    override suspend fun updateProducts(request: RequestCreateProductsItem): Flow<ResultWrapper<ItemResponseBasic<DataCreateProducts>>> {
+    override suspend fun updateProducts(
+        id: String?,
+        request: RequestCreateProductsItem
+    ): Flow<ResultWrapper<ItemResponseBasic<DataCreateProducts>>> {
         return proceedFlow {
-            val response = source.updateProducts(request).toItemResponseBasic()
+            val response = source.updateProducts(id, request).toItemResponseBasic()
             ItemResponseBasic(
                 success = response.success,
                 message = response.message,
@@ -197,6 +228,77 @@ class ApplicationRepositoryImpl(
     override suspend fun deleteProduct(id: String?): Flow<ResultWrapper<ItemResponseBasic<ItemAllProducts>>> {
         return proceedFlow {
             val response = source.deleteProduct(id).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun createProductCategory(request: RequestProductsCategory): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> {
+        return proceedFlow {
+            val response = source.createProductCategory(request).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun getAllProductCategories(
+        pageItem: Int?,
+        limit: Int?,
+        search: String?
+    ): ResponseAllProductCategory {
+        return source.getAllProductCategories(pageItem, limit, search)
+    }
+
+    override suspend fun getProductCategoryById(id: String?): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> {
+        return proceedFlow {
+            val response = source.getProductCategoryById(id).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun updateProductCategory(
+        id: String?,
+        request: RequestProductsCategory
+    ): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> {
+        return proceedFlow {
+            val response = source.updateProductCategory(id, request).toItemResponseBasic()
+            ItemResponseBasic(
+                success = response.success,
+                message = response.message,
+                data = response.data
+            )
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+        }
+    }
+
+    override suspend fun deleteProductCategory(id: String?): Flow<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> {
+        return proceedFlow {
+            val response = source.deleteProductCategory(id).toItemResponseBasic()
             ItemResponseBasic(
                 success = response.success,
                 message = response.message,

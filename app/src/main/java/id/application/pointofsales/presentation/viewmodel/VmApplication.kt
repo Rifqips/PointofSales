@@ -15,10 +15,14 @@ import id.application.core.data.network.model.auth.ItemResponseLogin
 import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
+import id.application.core.data.network.model.products.category.RequestProductsCategory
+import id.application.core.data.network.model.products.category.ResponseProductCategory
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.basic.ItemResponseBasic
 import id.application.core.domain.model.profile.ItemResponseProfile
+import id.application.core.domain.paging.CategoriesPagingSource
+import id.application.core.domain.paging.ProductsPagingSource
 import id.application.core.domain.paging.UsersPagingSource
 import id.application.core.domain.repository.ApplicationRepository
 import id.application.core.utils.ResultWrapper
@@ -48,6 +52,10 @@ class VmApplication(
 
     private val _itemResponseProductId = MutableLiveData<ResultWrapper<ItemResponseBasic<ItemAllProducts>>>()
     val itemResponseProductId: LiveData<ResultWrapper<ItemResponseBasic<ItemAllProducts>>> = _itemResponseProductId
+
+    private val _itemResponseProductCategory = MutableLiveData<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>()
+    val itemResponseProductCategory: LiveData<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> = _itemResponseProductCategory
+
 
     private val _loadingPagingResults = MutableLiveData<Boolean>()
     val loadingPagingResults: LiveData<Boolean> = _loadingPagingResults
@@ -150,6 +158,11 @@ class VmApplication(
 //        search: String? = null,
 //    ): ResponseAllProductsItem
 
+
+    val productsList = Pager(PagingConfig(pageSize = 10)) {
+        ProductsPagingSource(repository)
+    }.liveData.cachedIn(viewModelScope)
+
     fun getProductId(id: String? = null){
         viewModelScope.launch {
             repository.getProductId(id).collect{
@@ -164,7 +177,45 @@ class VmApplication(
                 _itemResponseProductId.postValue(it)
             }
         }
-
     }
 
+    fun createProductCategory(request: RequestProductsCategory){
+        viewModelScope.launch {
+            repository.createProductCategory(request).collect{
+                _itemResponseProductCategory.postValue(it)
+            }
+        }
+    }
+
+    fun getAllProductCategories(
+        pageItem: Int? = null,
+        limit: Int? = null,
+        search: String? = null,
+    ){}
+
+    val categoriesList = Pager(PagingConfig(pageSize = 10)) {
+        CategoriesPagingSource(repository)
+    }.liveData.cachedIn(viewModelScope)
+
+    suspend fun getProductCategoryById(id: String? = null){
+        viewModelScope.launch {
+            repository.getProductCategoryById()
+        }
+    }
+
+    suspend fun updateProductCategory(id: String? = null,request: RequestProductsCategory,){
+        viewModelScope.launch {
+            repository.updateProductCategory(id, request).collect{
+                _itemResponseProductCategory.postValue(it)
+            }
+        }
+    }
+
+    suspend fun deleteProductCategory(id: String? = null,){
+        viewModelScope.launch {
+            repository.deleteProductCategory(id).collect{
+                _itemResponseProductCategory.postValue(it)
+            }
+        }
+    }
 }

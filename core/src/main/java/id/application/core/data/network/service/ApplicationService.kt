@@ -12,6 +12,9 @@ import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
 import id.application.core.data.network.model.products.ResponseAllProductsItem
+import id.application.core.data.network.model.products.category.RequestProductsCategory
+import id.application.core.data.network.model.products.category.ResponseAllProductCategory
+import id.application.core.data.network.model.products.category.ResponseProductCategory
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import okhttp3.OkHttpClient
@@ -56,8 +59,9 @@ interface ApplicationService {
         @Body request: RequestCreateProductsItem,
     ): ResponseBasicItem<DataCreateProducts>
 
-    @PUT("products")
+    @PUT("products/{id}")
     suspend fun updateProducts(
+        @Path("id") id: String? = null,
         @Body request: RequestCreateProductsItem,
     ): ResponseBasicItem<DataCreateProducts>
 
@@ -78,6 +82,33 @@ interface ApplicationService {
         @Path("id") id: String? = null,
     ): ResponseBasicItem<ItemAllProducts>
 
+    @POST("product-categories")
+    suspend fun createProductCategory(
+        @Body request: RequestProductsCategory,
+    ): ResponseBasicItem<ResponseProductCategory>
+
+    @GET("product-categories")
+    suspend fun getAllProductCategories(
+        @Query("page") pageItem: Int? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("search") search: String? = null,
+    ): ResponseAllProductCategory
+
+    @GET("product-categories/{id}")
+    suspend fun getProductCategoryById(
+        @Path("id") id: String? = null,
+    ):  ResponseBasicItem<ResponseProductCategory>
+
+    @PUT("product-categories/{id}")
+    suspend fun updateProductCategory(
+        @Path("id") id: String? = null,
+        @Body request: RequestProductsCategory,
+    ): ResponseBasicItem<ResponseProductCategory>
+
+    @DELETE("product-categories/{id}")
+    suspend fun deleteProductCategory(
+        @Path("id") id: String? = null,
+    ): ResponseBasicItem<ResponseProductCategory>
 
     companion object{
         @JvmStatic
