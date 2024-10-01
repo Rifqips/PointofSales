@@ -57,8 +57,8 @@ object AppModules {
 
     private val localModule = module {
         single { androidContext().appDataSource }
-        single { ApplicationDatabase.getInstance(get()) }
         single<PreferenceDataStoreHelper> { PreferenceDataStoreHelperImpl(get()) }
+        single { ApplicationDatabase.getInstance(get()) }
         single { get<ApplicationDatabase>().cartDao() }
     }
 
