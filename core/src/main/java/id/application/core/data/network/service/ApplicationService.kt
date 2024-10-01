@@ -34,7 +34,7 @@ interface ApplicationService {
     @POST("auth/login")
     suspend fun login(
         @Body request: RequestLoginItem
-    ): ResponseBasicItem<ResponseLoginItem>
+    ): ResponseLoginItem
 
     @POST("auth/profile")
     suspend fun profile(): ResponseBasicItem<ResponseProfileItem>

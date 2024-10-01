@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.pointofsales.databinding.ItemAdminProductsBinding
-import id.application.pointofsales.databinding.ItemAdminUsersBinding
 import id.application.pointofsales.utils.Utils.formatRupiah
 
 class AdminProductsPagingAdapter(

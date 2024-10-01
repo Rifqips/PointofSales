@@ -1,5 +1,6 @@
 package id.application.core.data.datasource
 
+import android.util.Log
 import id.application.core.data.network.model.admin_user.RequestCreateUserItem
 import id.application.core.data.network.model.admin_user.ResponseAllUsersItem
 import id.application.core.data.network.model.auth.RequestLoginItem
@@ -20,7 +21,7 @@ interface ApplicationDataSource {
 
     suspend fun login(
         request: RequestLoginItem
-    ): ResponseBasicItem<ResponseLoginItem>
+    ): ResponseLoginItem
 
     suspend fun profile(): ResponseBasicItem<ResponseProfileItem>
 
@@ -87,7 +88,8 @@ class ApplicationDataSourceImpl(
     private val service: ApplicationService
 ): ApplicationDataSource {
 
-    override suspend fun login(request: RequestLoginItem): ResponseBasicItem<ResponseLoginItem> {
+    override suspend fun login(request: RequestLoginItem): ResponseLoginItem {
+        Log.d("check-login", "from source $request")
         return service.login(request)
     }
 

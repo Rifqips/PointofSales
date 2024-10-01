@@ -3,10 +3,10 @@ package id.application.core.data.network.model.auth
 data class ItemResponseLogin(
     val accessToken: String?,
     val tokenType: String?,
-    val expiresIn: Int?
+    val expiresIn: String?
 )
 
-fun ResponseLoginItem.toItemResponseLogin(): ItemResponseLogin {
+fun DataLoginItem.toItemResponseLogin(): ItemResponseLogin {
     return ItemResponseLogin(
         accessToken = this.accessToken,
         tokenType = this.tokenType,

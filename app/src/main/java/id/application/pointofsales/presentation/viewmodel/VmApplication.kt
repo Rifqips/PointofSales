@@ -12,7 +12,7 @@ import androidx.paging.cachedIn
 import androidx.paging.liveData
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
-import id.application.core.data.network.model.auth.ItemResponseLogin
+import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
@@ -36,8 +36,8 @@ class VmApplication(
     private val repository: ApplicationRepository
 ) : ViewModel() {
 
-    private val _itemResponseLogin = MutableLiveData<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>>()
-    val itemResponseLogin: LiveData<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>> = _itemResponseLogin
+    private val _itemResponseLogin = MutableLiveData<ResultWrapper<ResponseLoginItem>>()
+    val itemResponseLogin: LiveData<ResultWrapper<ResponseLoginItem>> = _itemResponseLogin
 
     private val _isUserLogin = MutableLiveData<Boolean>()
     val isUserLogin: LiveData<Boolean> = _isUserLogin
@@ -60,10 +60,6 @@ class VmApplication(
     private val _loadingPagingResults = MutableLiveData<Boolean>()
     val loadingPagingResults: LiveData<Boolean> = _loadingPagingResults
 
-    init {
-        getProfile()
-    }
-
 
     fun login(request: ItemRequestLogin) {
         viewModelScope.launch {
@@ -71,7 +67,7 @@ class VmApplication(
                 _itemResponseLogin.postValue(result)
             }
         }
-        Log.d("check-login", request.toString())
+        Log.d("check-login", "from vm $request")
     }
 
     fun checkLogin() {

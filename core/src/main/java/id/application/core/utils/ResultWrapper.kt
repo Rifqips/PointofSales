@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -62,10 +64,21 @@ fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
         )
     }.catch { e ->
         val exception = when (e) {
-            is IOException ->
-                NoInternetException()
-            is HttpException ->
-                ApiException(e.message().orEmpty(), e.code(), e.response())
+            is IOException -> NoInternetException()
+
+            is HttpException -> {
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorMessage = errorBody?.let {
+                    try {
+                        val jsonObject = JSONObject(it)
+                        jsonObject.getString("message")
+                    } catch (jsonException: JSONException) {
+                        "Unknown error"
+                    }
+                }
+                ApiException(e.message().orEmpty(), e.code(), e.response(), errorMessage)
+            }
+
             else -> Exception(e)
         }
         emit(ResultWrapper.Error<T>(exception = exception))

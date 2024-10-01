@@ -1,11 +1,9 @@
 package id.application.core.domain.repository
 
-import android.util.Log
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.datasource.ApplicationDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
-import id.application.core.data.network.model.auth.ItemResponseLogin
-import id.application.core.data.network.model.auth.toItemResponseLogin
+import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.auth.toRequestLoginItem
 import id.application.core.data.network.model.products.DataCreateProducts
 import id.application.core.data.network.model.products.ItemAllProducts
@@ -34,7 +32,7 @@ interface ApplicationRepository {
 
     suspend fun login(
         request: ItemRequestLogin
-    ): Flow<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>>
+    ): Flow<ResultWrapper<ResponseLoginItem>>
 
     suspend fun profile(): Flow<ResultWrapper<ItemResponseBasic<ItemResponseProfile>>>
 
@@ -103,20 +101,11 @@ class ApplicationRepositoryImpl(
     private val pref: AppPreferenceDataSource
 ) : ApplicationRepository {
 
-    override suspend fun login(request: ItemRequestLogin): Flow<ResultWrapper<ItemResponseBasic<ItemResponseLogin>>> {
+    override suspend fun login(request: ItemRequestLogin): Flow<ResultWrapper<ResponseLoginItem>> {
         return proceedFlow {
-            val response = source.login(request.toRequestLoginItem()).toItemResponseBasic()
-            val mappedData = response.data?.toItemResponseLogin()
-            mappedData?.accessToken?.let {
-                pref.saveUserToken(it)
-                Log.d("check-login", request.toString())
-            }
-            ItemResponseBasic(
-                success = response.success,
-                message = response.message,
-                data = mappedData
-            )
-
+            val login =  source.login(request.toRequestLoginItem())
+            pref.saveUserToken(login.data.accessToken)
+            login
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
