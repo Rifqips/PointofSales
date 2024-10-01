@@ -1,5 +1,6 @@
 package id.application.pointofsales.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,7 +57,6 @@ class VmApplication(
     private val _itemResponseProductCategory = MutableLiveData<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>>()
     val itemResponseProductCategory: LiveData<ResultWrapper<ItemResponseBasic<ResponseProductCategory>>> = _itemResponseProductCategory
 
-
     private val _loadingPagingResults = MutableLiveData<Boolean>()
     val loadingPagingResults: LiveData<Boolean> = _loadingPagingResults
 
@@ -71,6 +71,7 @@ class VmApplication(
                 _itemResponseLogin.postValue(result)
             }
         }
+        Log.d("check-login", request.toString())
     }
 
     fun checkLogin() {

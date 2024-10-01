@@ -1,5 +1,6 @@
 package id.application.pointofsales.presentation.feature.login
 
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.navigation.fragment.findNavController
 import id.application.core.data.network.model.auth.ItemRequestLogin
@@ -51,6 +52,7 @@ class LoginFragment :
             password = binding.etPasswordEditLogin.text.toString()
         )
         viewModel.login(itemLogin)
+        Toast.makeText(context, "isClicked", Toast.LENGTH_SHORT).show()
     }
 
 

@@ -1,5 +1,6 @@
 package id.application.core.domain.repository
 
+import android.util.Log
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.datasource.ApplicationDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
@@ -27,6 +28,7 @@ import id.application.core.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.runBlocking
 
 interface ApplicationRepository {
 
@@ -105,12 +107,16 @@ class ApplicationRepositoryImpl(
         return proceedFlow {
             val response = source.login(request.toRequestLoginItem()).toItemResponseBasic()
             val mappedData = response.data?.toItemResponseLogin()
-            mappedData?.accessToken?.let { pref.saveUserToken(it) }
+            mappedData?.accessToken?.let {
+                pref.saveUserToken(it)
+                Log.d("check-login", request.toString())
+            }
             ItemResponseBasic(
                 success = response.success,
                 message = response.message,
                 data = mappedData
             )
+
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
