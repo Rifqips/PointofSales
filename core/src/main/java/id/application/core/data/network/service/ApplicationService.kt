@@ -9,6 +9,7 @@ import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
 import id.application.core.data.network.model.products.DataCreateProducts
+import id.application.core.data.network.model.products.ItemAllProducts
 import id.application.core.data.network.model.products.RequestCreateProductsItem
 import id.application.core.data.network.model.products.ResponseAllProductsItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
@@ -20,6 +21,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
@@ -54,6 +56,10 @@ interface ApplicationService {
         @Body request: RequestCreateProductsItem,
     ): ResponseBasicItem<DataCreateProducts>
 
+    @PUT("products")
+    suspend fun updateProducts(
+        @Body request: RequestCreateProductsItem,
+    ): ResponseBasicItem<DataCreateProducts>
 
     @GET("products")
     suspend fun getAllProducts(
@@ -62,16 +68,15 @@ interface ApplicationService {
         @Query("search") search: String? = null,
     ): ResponseAllProductsItem
 
-
     @DELETE("products/{id}")
     suspend fun getProductId(
         @Path("id") id: String? = null,
-    ): ResponseBasicItem<ResponseProfileItem>
+    ): ResponseBasicItem<ItemAllProducts>
 
     @DELETE("products/{id}")
-    suspend fun deleteProduct(
+    suspend fun deleteProductById(
         @Path("id") id: String? = null,
-    ): ResponseBasicItem<ResponseProfileItem>
+    ): ResponseBasicItem<ItemAllProducts>
 
 
     companion object{

@@ -12,6 +12,9 @@ import androidx.paging.liveData
 import id.application.core.data.datasource.AppPreferenceDataSource
 import id.application.core.data.network.model.auth.ItemRequestLogin
 import id.application.core.data.network.model.auth.ItemResponseLogin
+import id.application.core.data.network.model.products.DataCreateProducts
+import id.application.core.data.network.model.products.ItemAllProducts
+import id.application.core.data.network.model.products.RequestCreateProductsItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.domain.model.admin_user.ItemRequestCreateUser
 import id.application.core.domain.model.basic.ItemResponseBasic
@@ -40,6 +43,11 @@ class VmApplication(
     private val _itemResponseCreateUser = MutableLiveData<ResultWrapper<ItemResponseBasic<UserProfileItem>>>()
     val itemResponseCreateUser: LiveData<ResultWrapper<ItemResponseBasic<UserProfileItem>>> = _itemResponseCreateUser
 
+    private val _itemResponseCreateProducts = MutableLiveData<ResultWrapper<ItemResponseBasic<DataCreateProducts>>>()
+    val itemResponseCreateProducts: LiveData<ResultWrapper<ItemResponseBasic<DataCreateProducts>>> = _itemResponseCreateProducts
+
+    private val _itemResponseProductId = MutableLiveData<ResultWrapper<ItemResponseBasic<ItemAllProducts>>>()
+    val itemResponseProductId: LiveData<ResultWrapper<ItemResponseBasic<ItemAllProducts>>> = _itemResponseProductId
 
     private val _loadingPagingResults = MutableLiveData<Boolean>()
     val loadingPagingResults: LiveData<Boolean> = _loadingPagingResults
@@ -109,7 +117,6 @@ class VmApplication(
         }
     }
 
-
     val userList = Pager(PagingConfig(pageSize = 10)) {
         UsersPagingSource(repository)
     }.liveData.cachedIn(viewModelScope)
@@ -119,6 +126,45 @@ class VmApplication(
         viewModelScope.launch {
             preferencesDatasource.deleteAllData()
         }
+    }
+
+    fun createProducts(request: RequestCreateProductsItem){
+        viewModelScope.launch {
+            repository.createProducts(request).collect{
+                _itemResponseCreateProducts.postValue(it)
+            }
+        }
+    }
+
+    fun updateProducts(request: RequestCreateProductsItem){
+        viewModelScope.launch {
+            repository.createProducts(request).collect{
+                _itemResponseCreateProducts.postValue(it)
+            }
+        }
+    }
+
+//    suspend fun getAllProducts(
+//        pageItem: Int? = null,
+//        limit: Int? = null,
+//        search: String? = null,
+//    ): ResponseAllProductsItem
+
+    fun getProductId(id: String? = null){
+        viewModelScope.launch {
+            repository.getProductId(id).collect{
+                _itemResponseProductId.postValue(it)
+            }
+        }
+    }
+
+    fun deleteProduct(id: String? = null){
+        viewModelScope.launch {
+            repository.getProductId(id).collect{
+                _itemResponseProductId.postValue(it)
+            }
+        }
+
     }
 
 }

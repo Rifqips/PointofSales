@@ -5,6 +5,10 @@ import id.application.core.data.network.model.admin_user.ResponseAllUsersItem
 import id.application.core.data.network.model.auth.RequestLoginItem
 import id.application.core.data.network.model.auth.ResponseLoginItem
 import id.application.core.data.network.model.basic.ResponseBasicItem
+import id.application.core.data.network.model.products.DataCreateProducts
+import id.application.core.data.network.model.products.ItemAllProducts
+import id.application.core.data.network.model.products.RequestCreateProductsItem
+import id.application.core.data.network.model.products.ResponseAllProductsItem
 import id.application.core.data.network.model.profile.ResponseProfileItem
 import id.application.core.data.network.model.profile.UserProfileItem
 import id.application.core.data.network.service.ApplicationService
@@ -28,6 +32,28 @@ interface ApplicationDataSource {
     suspend fun createUser(
         request: RequestCreateUserItem,
     ): ResponseBasicItem<UserProfileItem>
+
+    suspend fun createProducts(
+        request: RequestCreateProductsItem,
+    ): ResponseBasicItem<DataCreateProducts>
+
+    suspend fun updateProducts(
+        request: RequestCreateProductsItem,
+    ): ResponseBasicItem<DataCreateProducts>
+
+    suspend fun getAllProducts(
+        pageItem: Int? = null,
+        limit: Int? = null,
+        search: String? = null,
+    ): ResponseAllProductsItem
+
+    suspend fun getProductId(
+        id: String? = null,
+    ): ResponseBasicItem<ItemAllProducts>
+
+    suspend fun deleteProduct(
+        id: String? = null,
+    ): ResponseBasicItem<ItemAllProducts>
 }
 
 class ApplicationDataSourceImpl(
@@ -54,6 +80,30 @@ class ApplicationDataSourceImpl(
 
     override suspend fun createUser(request: RequestCreateUserItem): ResponseBasicItem<UserProfileItem> {
         return service.createUser(request)
+    }
+
+    override suspend fun createProducts(request: RequestCreateProductsItem): ResponseBasicItem<DataCreateProducts> {
+        return service.createProducts(request)
+    }
+
+    override suspend fun updateProducts(request: RequestCreateProductsItem): ResponseBasicItem<DataCreateProducts> {
+        return service.updateProducts(request)
+    }
+
+    override suspend fun getAllProducts(
+        pageItem: Int?,
+        limit: Int?,
+        search: String?
+    ): ResponseAllProductsItem {
+        return service.getAllProducts(pageItem, limit, search)
+    }
+
+    override suspend fun getProductId(id: String?): ResponseBasicItem<ItemAllProducts> {
+        return service.getProductId(id)
+    }
+
+    override suspend fun deleteProduct(id: String?): ResponseBasicItem<ItemAllProducts> {
+        return service.deleteProductById(id)
     }
 
 
